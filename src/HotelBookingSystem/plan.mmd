@@ -1,0 +1,39 @@
+classDiagram
+    class Room {
+        - roomNumber
+        - type
+        - pricePerNight
+        - status
+    }
+
+    class Guest {
+        - name
+        - phone
+        - email
+    }
+
+    class Reservation {
+        - checkInDate
+        - checkOutDate
+        - breakfastIncluded
+    }
+
+    class Hotel {
+        - rooms
+        - reservation
+    }
+
+    class Invoice {
+    }
+
+    class Main {
+
+    }
+
+    %% Relationships
+    Hotel "1" *-- "0..*" Room
+    Hotel "1" *-- "0..*" Reservation
+    Reservation "1" *-- "1" Guest
+    Reservation "1" *-- "1" Room
+    Hotel --> Invoice
+    Invoice ..> Reservation

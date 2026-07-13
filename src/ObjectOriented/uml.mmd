@@ -1,0 +1,47 @@
+classDiagram
+    class Priceable{
+        <<interface>>
+        + getPrice() double
+        + getName() String
+        + isExpensive() boolean
+    }
+
+    class Product{
+        - String name
+        - double price
+        - int productCount
+        + Product(String, double)
+        + getPrice() double
+        + getName() String
+        + setPrice(double) void
+        + isExpensive() boolean
+        + getProductCount() int
+        + toString() String
+    }
+
+    class DiscountedProduct{
+        - double discount
+        +DiscountedProduct(String, double)
+        +getPrice() double
+        +toString() String
+    }
+
+    class cartItem{
+        - Priceable Product
+        - int quantity
+        + cartItem(Priceable, quantity)
+        +toString() String
+    }
+
+    class Cart{
+        - arrayList~CartItem~ items
+        + add(Priceable, int) void
+        +print() void
+        + getTotal() double
+    }
+
+    Priceable <..Product: implements
+    Product <--DiscountedProduct: extends
+    cartItem *--Priceable: has
+    Cart *--"0..*" cartItem: has
+
