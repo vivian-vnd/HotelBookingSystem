@@ -1,4 +1,4 @@
-package HotelBooking.HotelBookingSystem;
+package HotelBooking;
 
 import java.util.ArrayList;
 

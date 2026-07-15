@@ -1,4 +1,4 @@
-package HotelBooking.HotelBookingSystem;
+package HotelBooking;
 
 public class Reservation {
     // === Attributes ===

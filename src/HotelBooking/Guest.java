@@ -1,4 +1,4 @@
-package HotelBooking.HotelBookingSystem;
+package HotelBooking;
 
 public class Guest {
     private int id;
