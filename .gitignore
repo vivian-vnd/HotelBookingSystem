@@ -26,3 +26,18 @@ hs_err_pid*
 
 # Optional - add more if needed
 # plan.mmd          # uncomment this if you don't want to push your plan fileAssignments/
+src/Assignment3/
+src/Exceptions/
+src/ObjectOriented/
+src/Assignments/
+src/out/
+src/Hashmap.java
+src/hello.java
+src/loops.java
+src/methods.java
+src/Main.java
+src/MovieNight.java
+src/scannerExercise.java
+src/test.java
+src/test.c
+
