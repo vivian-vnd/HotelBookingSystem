@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public class Reservation {
     // === Attributes ===
     private int reservationId;
-    // private Guest guest;
-    // private Room room;
+    private Guest guest;
+    //  private Room room;
     // private LocalDate checkInDate
     // private LocalDate checkOutDate
     private boolean breakfastIncluded;
@@ -28,10 +28,14 @@ public class Reservation {
         return breakfastIncluded;
     }
 
+    public Guest getGuest() {
+        return guest;
+    }
+
     public String getStatus() {
         return status;
     }
 
     // === Methods ===
-
+    
 }
