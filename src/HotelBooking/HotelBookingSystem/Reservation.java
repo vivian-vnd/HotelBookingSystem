@@ -1,6 +1,4 @@
-package HotelBookingSystem;
-
-import java.time.LocalDate;
+package HotelBooking.HotelBookingSystem;
 
 public class Reservation {
     // === Attributes ===
