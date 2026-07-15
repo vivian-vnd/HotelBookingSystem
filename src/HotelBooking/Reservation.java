@@ -18,6 +18,14 @@ public class Reservation {
         this.status = "Active";     // Default staus when booking is made
     }
 
+    public Reservation(int newId, Guest guest, boolean breakfastIncluded) {
+        this.reservationId = newId;
+        this.guest = guest;
+        this.breakfastIncluded = breakfastIncluded;
+        this.status = "Active";
+    }
+
+
     // === Getters ===
     public int getReservationId() {
         return reservationId;
