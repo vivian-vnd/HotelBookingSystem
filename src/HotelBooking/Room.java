@@ -4,7 +4,7 @@ public class Room {
     private int roomNumber;
     private String type;
     private double pricePerNight;
-    private String status
+    private String status;
 
     public Room(String roomNumber, String type, double pricePerNight, String status) {
         this.roomNumber = roomNumber;
