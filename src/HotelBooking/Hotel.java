@@ -55,10 +55,7 @@ public class Hotel {
             return null;
         }
 
-        if (!rooms.isAvailable()) {
-            System.out.println("Room is already booked for guest with ID: " + guestId);
-            return null;
-        }
+        ///// updating
 
         // Make a new reservation
         int newId = reservations.size() + 1;
@@ -66,8 +63,7 @@ public class Hotel {
 
         // add reservation to the list
         reservations.add(newReservation);
-        rooms.bookRoom();
-            
+
         return newReservation;
     }
 
