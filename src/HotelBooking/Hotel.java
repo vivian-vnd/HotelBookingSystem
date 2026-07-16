@@ -62,14 +62,12 @@ public class Hotel {
 
         // Make a new reservation
         int newId = reservations.size() + 1;
-        Reservation newReservation = new Reservation(newId, guest, breakfastIncluded);
+        Reservation newReservation = new Reservation(newId, guest, breakfastIncluded, room);
 
         // add reservation to the list
         reservations.add(newReservation);
-
-        // mark room as booked
         rooms.bookRoom();
-
+            
         return newReservation;
     }
 
