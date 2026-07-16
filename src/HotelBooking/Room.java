@@ -1,7 +1,7 @@
 package HotelBooking;
 
 public class Room {
-    private int roomNumber;
+    private String roomNumber;
     private String type;
     private double pricePerNight;
     private String status;
@@ -13,13 +13,27 @@ public class Room {
         this.status = status;
     }
 
+    private double getPriceByType(String type) {
+        switch (type.toLowerCase()) {
+            case "single":
+                return 50.00;
+            case "double":
+                return 80.00;
+            case "deluxe":
+                return 120.00;
+            case "suite":
+                return 200.00;
+            default:
+                return 0.00;
+        }
+    }
 
-    // Getters
-    public int getRoomNumber() {
+    // Getters and setters
+    public String getRoomNumber() {
         return roomNumber;
     }
 
-    public void setRoomNumber(int roomNumber) {
+    public void setRoomNumber(String roomNumber) {
         this.roomNumber = roomNumber;
     }
 
