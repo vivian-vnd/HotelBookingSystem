@@ -4,9 +4,9 @@ public class Room {
     private int roomNumber;
     private String type;
     private double pricePerNight;
-    private String status;
+    private String status; // "Available" or "Booked"
 
-    public Room(String roomNumber, String type, double pricePerNight, String status) {
+    public Room(int roomNumber, String type, double pricePerNight, String status) {
         this.roomNumber = roomNumber;
         this.type = type;
         this.pricePerNight = pricePerNight;
@@ -45,6 +45,29 @@ public class Room {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    // Methods
+
+    // Check if the room is available
+    public boolean isAvailable() {
+        return status.equalsIgnoreCase("available");
+    }
+
+    // Mark the room as Booked
+    public void bookRoom() {
+        this.status = "Booked";
+    }
+
+    // Mark the room as available again
+    public void releaseRoom() {
+        this.status = "Available";
+    }
+
+    // printing room information
+    @Override
+    public String toString() {
+        return "Room " + roomNumber + " | Type: " + type + " | Price: €" + pricePerNight + " | Status: " + status;
     }
 
 }
