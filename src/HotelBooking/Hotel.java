@@ -1,18 +1,16 @@
 package HotelBooking;
 
 import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Hotel {
     // ==== ATTRIBUTES (Data the Hotel Stores) ======
 
     // This list stores all the rooms in the hotel
     private ArrayList<Room> rooms;
-
-    // This list stores all the reservations that have been made
-    // every time someone books a room, we add the Reservation object here
-    private ArrayList<Reservation> reservations;
-
+    private ArrayList<Reservation> reservations;  // This list stores all the reservations that have been made, every time someone books a room, we add the Reservation object here
     private GuestManager guestManager;
 
 
@@ -25,9 +23,9 @@ public class Hotel {
     }
 
     // ==== ROOM HELPER METHOD ======
-    public Room findRoomByNumber(int roomNumber) {
+    public Room findRoomByNumber(String roomNumber) {
         for (Room room : rooms) {
-            if (room.getRoomNumber() == roomNumber) {
+            if (room.getRoomNumber().equals(roomNumber)) {
                 return room;
             }
         }
@@ -38,7 +36,7 @@ public class Hotel {
 
     // ====== RESERVATION / BOOKING METHODS (Vivian) =======
 
-    public Reservation makeReservation(int guestId, int roomNumber,boolean breakfastIncluded) {
+    public Reservation makeReservation(int guestId, String roomNumber, LocalDate checkIn, LocalDate checkOut, boolean breakfastIncluded) {
 
 
         // Find the guest using GuestManager
@@ -55,12 +53,27 @@ public class Hotel {
             return null;
         }
 
-        ///// updating
+        // check if room is available
+        if (!room.isAvailable()) {
+            System.out.println("Room " + roomNumber + " is already booked.");
+            return null;
+        }
 
         // Make a new reservation
+        int newId = reservations.size() + 1;
+        Reservation newReservation = new Reservation(
+                newId,
+                guest,
+                room,
+                checkIn,
+                checkOut,
+                breakfastIncluded);
 
 
-        // add reservation to the list
+        // save reservation and book the room
+        reservations.add(newReservation);
+        room.bookRoom();
+        return newReservation;
     }
 
     public boolean cancelReservation(int reservationId) {
@@ -73,5 +86,37 @@ public class Hotel {
         }
         System.out.println("Reservation not found or already cancelled");
         return false;
+    }
+
+    public Reservation getReservationById(int reservationId) {
+        for (Reservation res : reservations) {
+            if (res.getReservationId() == reservationId) {
+                return res;
+            }
+        }
+        return null;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    // ===== Check in and check out =====
+    public void checkIn(int reservationId) {
+        Reservation res = getReservationById(reservationId);
+        if (res != null && res.isActive()) {
+            System.out.println("Check-in succesful for reservation #" + reservationId);
+        } else {
+            System.out.println("Check-in failed for reservation #" + reservationId);
+        }
+    }
+
+    public void checkOut(int reservationId) {
+        Reservation res = getReservationById(reservationId);
+        if (res != null && res.isActive()) {
+            System.out.println("Check-out succesful for reservation #" + reservationId);
+        } else {
+            System.out.println("Check-out failed for reservation #" + reservationId);
+        }
     }
 }
