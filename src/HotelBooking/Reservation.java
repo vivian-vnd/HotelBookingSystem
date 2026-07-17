@@ -14,7 +14,7 @@ public class Reservation {
     private String status;
 
     // === Constructor ===
-    public Reservation(int reservationId, Room room, LocalDate checkInDate, LocalDate checkOutDate, boolean breakfastIncluded, Guest guest, String status) {
+    public Reservation(int newId, Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate, boolean breakfastIncluded) {
         this.reservationId = reservationId;
         this.room = room;
         this.checkInDate = checkInDate;
