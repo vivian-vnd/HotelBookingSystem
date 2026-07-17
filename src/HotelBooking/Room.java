@@ -61,4 +61,27 @@ public class Room {
         this.status = status;
     }
 
+    // ==== Methods ======
+
+    // Check if the room is available for booking
+    public boolean isAvailable() {
+        return status.equalsIgnoreCase("Available");
+    }
+
+    // Marks the room as booked
+    public void bookRoom() {
+        this.status = "Booked";
+    }
+
+    // Mark the room as available again (after cancellation or checkout)
+    public void releaseRoom() {
+        this.status = "Available";
+    }
+
+    // ====== PRINTING =======
+    @Override
+    public String toString() {
+        return "Room " + roomNumber + " | Type: " + type + " | Price: €" + pricePerNight + " | Status: " + status;
+    }
+
 }

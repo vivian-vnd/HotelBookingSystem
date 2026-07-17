@@ -58,13 +58,9 @@ public class Hotel {
         ///// updating
 
         // Make a new reservation
-        int newId = reservations.size() + 1;
-        Reservation newReservation = new Reservation(newId, guest, breakfastIncluded, room);
+
 
         // add reservation to the list
-        reservations.add(newReservation);
-
-        return newReservation;
     }
 
     public boolean cancelReservation(int reservationId) {
