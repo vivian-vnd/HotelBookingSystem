@@ -5,13 +5,13 @@ import java.time.temporal.ChronoUnit;
 
 public class Reservation {
     // === Attributes ===
-    private int reservationId;
-    private Guest guest;
-    private Room room;
-    private LocalDate checkInDate;
+    private int reservationId;              // Unique number for the booking
+    private Guest guest;                    // Which guest made the booking
+    private Room room;                      // Which room was booked
+    private LocalDate checkInDate;          // when the guest is staying
     private LocalDate checkOutDate;
     private boolean breakfastIncluded;
-    private String status;
+    private String status;                  // "Active", "Cancelled"...
 
     // === Constructor ===
     public Reservation(int newId, Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate, boolean breakfastIncluded) {
