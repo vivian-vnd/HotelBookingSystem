@@ -1,25 +1,39 @@
 package HotelBooking;
 
 public class Room {
-    private int roomNumber;
+    private String roomNumber;
     private String type;
     private double pricePerNight;
-    private String status; // "Available" or "Booked"
+    private String status;
 
-    public Room(int roomNumber, String type, double pricePerNight, String status) {
+    public Room(String roomNumber, String type, double pricePerNight, String status) {
         this.roomNumber = roomNumber;
         this.type = type;
         this.pricePerNight = pricePerNight;
         this.status = status;
     }
 
+    private double getPriceByType(String type) {
+        switch (type.toLowerCase()) {
+            case "single":
+                return 50.00;
+            case "double":
+                return 80.00;
+            case "deluxe":
+                return 120.00;
+            case "suite":
+                return 200.00;
+            default:
+                return 0.00;
+        }
+    }
 
-    // Getters
-    public int getRoomNumber() {
+    // Getters and setters
+    public String getRoomNumber() {
         return roomNumber;
     }
 
-    public void setRoomNumber(int roomNumber) {
+    public void setRoomNumber(String roomNumber) {
         this.roomNumber = roomNumber;
     }
 
@@ -45,29 +59,6 @@ public class Room {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    // Methods
-
-    // Check if the room is available
-    public boolean isAvailable() {
-        return status.equalsIgnoreCase("available");
-    }
-
-    // Mark the room as Booked
-    public void bookRoom() {
-        this.status = "Booked";
-    }
-
-    // Mark the room as available again
-    public void releaseRoom() {
-        this.status = "Available";
-    }
-
-    // printing room information
-    @Override
-    public String toString() {
-        return "Room " + roomNumber + " | Type: " + type + " | Price: €" + pricePerNight + " | Status: " + status;
     }
 
 }
