@@ -9,9 +9,9 @@ public class Hotel {
     // ==== ATTRIBUTES (Data the Hotel Stores) ======
 
     // This list stores all the rooms in the hotel
-    private ArrayList<Room> rooms;
-    private ArrayList<Reservation> reservations;  // This list stores all the reservations that have been made, every time someone books a room, we add the Reservation object here
-    private GuestManager guestManager;
+    private ArrayList<Room> rooms;                  // List of all rooms
+    private ArrayList<Reservation> reservations;    // This list stores all the reservations that have been made, every time someone books a room, we add the Reservation object here
+    private GuestManager guestManager;              // Used to find guests
 
 
     // ====== CONSTRUCTOR =========
@@ -36,6 +36,7 @@ public class Hotel {
 
     // ====== RESERVATION / BOOKING METHODS (Vivian) =======
 
+    // Creates a new booking (finds guest + room, saves it )
     public Reservation makeReservation(int guestId, String roomNumber, LocalDate checkIn, LocalDate checkOut, boolean breakfastIncluded) {
 
 
@@ -46,7 +47,7 @@ public class Hotel {
             return null;
         }
 
-        // Find room
+        // Find room using its number
         Room room = findRoomByNumber(roomNumber);
         if (room == null) {
             System.out.println("Room not found with ID: " + roomNumber);
@@ -102,6 +103,8 @@ public class Hotel {
     }
 
     // ===== Check in and check out =====
+
+    // Finds the reservation using the reservationId
     public void checkIn(int reservationId) {
         Reservation res = getReservationById(reservationId);
         if (res != null && res.isActive()) {
@@ -119,4 +122,6 @@ public class Hotel {
             System.out.println("Check-out failed for reservation #" + reservationId);
         }
     }
+
+    // only prints a message for now. Doesn't change the status of the reservation yet.
 }
