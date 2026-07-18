@@ -22,7 +22,7 @@ public class Hotel {
     }
 
     // ==== ROOM HELPER METHOD ======
-    public Room findRoomByNumber(String roomNumber) {
+    public Room findRoomByNumber(String roomNumber) {       // Searches or a room using its room number and returns the `Room` object
         for (Room room : rooms) {
             if (room.getRoomNumber().equals(roomNumber)) {
                 return room;
@@ -32,6 +32,45 @@ public class Hotel {
     }
 
     // ===== ROOM MANAGEMENT METHODS (Randall) =========
+
+    public void addRoom(Room room) {        // adds a new room to the hotel's list of rooms
+        if (room != null) {
+            rooms.add(room);
+        }
+    }
+
+    public List<Room> getAllRooms() {       // returns a list of all rooms in the hotel (both available and booked)
+        return rooms;
+    }
+
+    public List<Room> getAvailableRooms() { // Returns only the room that are currently available for booking
+        List<Room> available = new ArrayList<>();
+        for (Room room : rooms) {
+            if (room.isAvailable()) {
+                available.add(room);
+            }
+        }
+        return available;
+    }
+
+    public List<Room> getAvailableRoomsByType(String type) {    // Returns only the available rooms of a specific type eg. single or double
+        List<Room> result = new ArrayList<>();
+        for (Room room : rooms) {
+            if (room.isAvailable() && room.getType().equalsIgnoreCase(type)) {
+                result.add(room);
+            }
+        }
+        return result;
+    }
+
+    public void updateRoomStatus(String roomNumber, String status) {
+        Room room = findRoomByNumber(roomNumber);
+        if (room != null) {
+            room.setStatus(status);
+        } else {
+            System.out.println("Room " + roomNumber + " not found");
+        }
+    }
 
     // ====== RESERVATION / BOOKING METHODS (Vivian) =======
 
