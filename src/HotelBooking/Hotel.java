@@ -140,7 +140,7 @@ public class Hotel {
         return reservations;
     }
 
-    // ===== Check in and check out =====
+    // ===== CHECK-IN/CHECK-OUT =====
 
     // Checks in a guest using reservation ID
     // Changes the status from "Active" to "CheckedIn"
