@@ -15,7 +15,7 @@ public class Reservation {
 
     // === Constructor ===
     public Reservation(int newId, Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate, boolean breakfastIncluded) {
-        this.reservationId = reservationId;
+        this.reservationId = newId;
         this.room = room;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
