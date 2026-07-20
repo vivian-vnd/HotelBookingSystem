@@ -26,6 +26,35 @@ public class Main {
             scanner.nextLine();
 
             // Call appropriate Hotel based on choice
+            switch (choice) {
+                case 1: // - Randall
+                    System.out.println("View Available Rooms: (not yet implemented)");
+                    break;
+
+                case 2: // - Vivian
+                    System.out.println("Make a reservation: (not yet implemented)");
+                    break;
+
+                case 3: // - Vivian
+                    System.out.println("Cancel a reservation: (not yet implemented)");
+                    break;
+
+                case 4: // free
+                    System.out.println("Check-in: (not yet implemented)");
+                    break;
+
+                case 5: // free
+                    System.out.println("Check-out: (not yet implemented)");
+                    break;
+
+                case 6: // free
+                    System.out.println("View All Reservations: (not yet implemented)");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
         }
+        scanner.close();
     }
 }
