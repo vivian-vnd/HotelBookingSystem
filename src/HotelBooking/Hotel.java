@@ -159,7 +159,21 @@ public class Hotel {
         } else {
             System.out.println("Check-out failed for reservation #" + reservationId);
         }
+        // only prints a message for now. Doesn't change the status of the reservation yet.
     }
 
-    // only prints a message for now. Doesn't change the status of the reservation yet.
+    // ===== ADDS GUEST TO THE SYSTEM =====
+    public void addGuest(Guest guest) {
+        guestManager.addGuest(guest);
+    }
+
+    // show all guests (for testing)
+    public void showAllGuests() {
+        System.out.println("=== Guests in the system ===");
+        for (Guest g : guestManager.getAllGuests()) {
+            System.out.println("ID: " + g.getId() + " | Name: " + g.getName());
+        }
+    }
+
+
 }
