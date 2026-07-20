@@ -1,24 +1,32 @@
 package HotelBooking;
 
+import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Main {
 
+
+
     public static void main(String[] args) {
         Hotel hotel = new Hotel();      // Create Hotel object
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+        // ====TEMPORARY SETUP FOR TESTING===============
 
-        // temporary setup for testing
         hotel.addRoom(new Room("101", "Single", 50.0, "Available"));
         hotel.addRoom(new Room("102", "Double", 80.0, "Available"));
         hotel.addRoom(new Room("103", "Suite", 150.0, "Available"));
 
         // Create a guest
         Guest guest1 = new Guest("Vivian", "58858870", "iwannaeaticecream.@gmail.com");
+        System.out.println("TestGuestID: " +  guest1.getId());
+        hotel.addGuest(guest1);
+        hotel.showAllGuests();
 
+        // ==================================================
 
         while (running) {
             // show menu
@@ -53,10 +61,10 @@ public class Main {
                     String roomNumber = scanner.nextLine();
 
                     System.out.print("Enter Check-in Date (dd-mm-yyyy): ");
-                    LocalDate checkInDate = LocalDate.parse(scanner.nextLine());
+                    LocalDate checkInDate = LocalDate.parse(scanner.nextLine(), formatter);
 
                     System.out.print("Enter Check-out Date (dd-mm-yyyy): ");
-                    LocalDate checkOutDate = LocalDate.parse(scanner.nextLine());
+                    LocalDate checkOutDate = LocalDate.parse(scanner.nextLine(), formatter);
 
                     System.out.println("Include Breakfast? (true/false): ");
                     boolean breakfastIncluded = scanner.nextBoolean();
