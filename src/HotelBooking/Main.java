@@ -39,15 +39,15 @@ public class Main {
                     System.out.println("Cancel a reservation: (not yet implemented)");
                     break;
 
-                case 4: // free
+                case 4: // Ronoh
                     System.out.println("Check-in: (not yet implemented)");
                     break;
 
-                case 5: // free
+                case 5: // Ronoh
                     System.out.println("Check-out: (not yet implemented)");
                     break;
 
-                case 6: // free
+                case 6: // Joana
                     System.out.println("View All Reservations: (not yet implemented)");
                     break;
 
