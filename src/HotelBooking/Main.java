@@ -38,14 +38,21 @@ public class Main {
                 case 3: // - Vivian
                     System.out.println("Cancel a reservation: (not yet implemented)");
                     break;
+case 4: // Check-in
+                System.out.print("Enter Reservation ID for Check-in: ");
+                int checkInId = scanner.nextInt();
+                scanner.nextLine(); //consume newline
+                
+                hotel.checkIn(checkInId);
+                break;
 
-                case 4: // Ronoh
-                    System.out.println("Check-in: (not yet implemented)");
-                    break;
-
-                case 5: // Ronoh
-                    System.out.println("Check-out: (not yet implemented)");
-                    break;
+            case 5: // Check-out
+                System.out.print("Enter Reservation ID for Check-out: ");
+                int checkOutId = scanner.nextInt();
+                scanner.nextLine(); // consume newline
+                
+                hotel.checkOut(checkOutId);
+                break;
 
                 case 6: // Joana
                     System.out.println("View All Reservations: (not yet implemented)");
