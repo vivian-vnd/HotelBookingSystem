@@ -73,7 +73,6 @@ public class Main {
                     Reservation reservation = hotel.makeReservation(guestId, roomNumber, checkInDate, checkOutDate, breakfastIncluded);
                     if (reservation != null) {
                         System.out.println("\nReservation Successful!");
-                        System.out.println("Reservation ID: " + reservation.getReservationId());
                         System.out.println(reservation.getReservationDetails());
                     } else {
                         System.out.println("Reservation failed. Please check and try again.");
