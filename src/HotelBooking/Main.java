@@ -38,7 +38,8 @@ public class Main {
                 case 3: // - Vivian
                     System.out.println("Cancel a reservation: (not yet implemented)");
                     break;
-case 4: // Check-in
+
+                case 4: // Check in
                 System.out.print("Enter Reservation ID for Check-in: ");
                 int checkInId = scanner.nextInt();
                 scanner.nextLine(); //consume newline
@@ -46,7 +47,7 @@ case 4: // Check-in
                 hotel.checkIn(checkInId);
                 break;
 
-            case 5: // Check-out
+                case 5: // Check out
                 System.out.print("Enter Reservation ID for Check-out: ");
                 int checkOutId = scanner.nextInt();
                 scanner.nextLine(); // consume newline
