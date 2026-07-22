@@ -11,11 +11,11 @@ public class Reservation {
     private LocalDate checkInDate;          // when the guest is staying
     private LocalDate checkOutDate;
     private boolean breakfastIncluded;
-    private String status;                  // "Active", "Cancelled"...
+    private String status;                  // Current status: "Active", "Cancelled", "CheckedIn", "Completed"
 
     // === Constructor ===
     public Reservation(int newId, Guest guest, Room room, LocalDate checkInDate, LocalDate checkOutDate, boolean breakfastIncluded) {
-        this.reservationId = reservationId;
+        this.reservationId = newId;
         this.room = room;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
@@ -51,14 +51,20 @@ public class Reservation {
 
     // === Methods ===
 
-    // Calculates how many nights the guest is staying (needs changes)
+    // Calculates how many nights the guest is staying
     public int getNumberOfNights() {
         return (int) ChronoUnit.DAYS.between(checkInDate, checkOutDate);
     }
 
     // Get a summary of the reservation (printing)
     public String getReservationDetails() {
-        return "Reservation ID: " + reservationId + "\nGuest: " + guest.getName() + "\nRoom: " + room.getRoomNumber() + " (" + room.getType() + ")" + "\nCheck-in: " + checkInDate + "\nCheck-out: "+ checkOutDate + "\nBreakfast Included: " + (breakfastIncluded ? "Yes" : "No") + "\nStatus: " + status;
+        return "Reservation ID: " + reservationId +
+                "\nGuest: " + guest.getName() +
+                "\nRoom: " + room.getRoomNumber() + " (" + room.getType() + ")" +
+                "\nCheck-in: " + checkInDate +
+                "\nCheck-out: "+ checkOutDate +
+                "\nBreakfast Included: " + (breakfastIncluded ? "Yes" : "No") +
+                "\nStatus: " + status;
     }
 
     // Cancel the reservation
@@ -69,5 +75,19 @@ public class Reservation {
     // Check if reservation is till active
     public boolean isActive() {
         return status.equals("Active");
+    }
+
+    // Checks the guest in
+    public void checkIn() {
+        if (this.status.equals("Active")) {      // Changes the status of the reservation to "CheckedIn"
+            this.status = "CheckedIn";           // This should only happen if the reservation is Active
+        }
+    }
+
+    // Completes the reservation
+    public void completeReservation() {
+        if (this.status.equals("CheckedIn") || this.status.equals("Active")) {      // Same goes for this
+            this.status = "Completed";                                              // Only used when guest is checking out
+        }
     }
 }

@@ -140,26 +140,71 @@ public class Hotel {
         return reservations;
     }
 
-    // ===== Check in and check out =====
+    // ===== CHECK-IN/CHECK-OUT =====
 
-    // Finds the reservation using the reservationId
+    // Checks in a guest using reservation ID
+    // Changes the status from "Active" to "CheckedIn"
     public void checkIn(int reservationId) {
-        Reservation res = getReservationById(reservationId);
-        if (res != null && res.isActive()) {
-            System.out.println("Check-in succesful for reservation #" + reservationId);
-        } else {
-            System.out.println("Check-in failed for reservation #" + reservationId);
+        Reservation res = getReservationById(reservationId);    // Find the reservation by ID
+        if (res == null) {                                      // Check if the reservation exist
+            System.out.println("Check-in not found: Reservation not found");
+            return;
         }
+
+        if (!res.isActive()) {          // Check if the reservation is still Active
+            System.out.println("Check-in failed: Reservation is not active (current status: " + res.getStatus() + ")");
+            return;
+        }
+
+        res.checkIn(); // Change status to "CheckedIn"
+
+        System.out.println("Check-in successful for Reservation #" + res.getReservationId());
+        System.out.println("Guest: " + res.getGuest().getName());
+        System.out.println("Room: " + res.getRoom().getRoomNumber());
     }
 
+    // Checks out a guest using reservation ID
+    // Changes the status to "Completed" and frees the room
     public void checkOut(int reservationId) {
         Reservation res = getReservationById(reservationId);
-        if (res != null && res.isActive()) {
-            System.out.println("Check-out succesful for reservation #" + reservationId);
-        } else {
-            System.out.println("Check-out failed for reservation #" + reservationId);
+
+        if (res == null) {      // Checks if the reservation exists
+            System.out.println("Check-out failed: Reservation not found");
+            return;
+        }
+
+        String currentStatus = res.getStatus(); // Get current status
+
+        if(currentStatus.equals("Completed") || currentStatus.equals("Cancelled")) {    // Prevents check-out if already completed or cancelled
+            System.out.println("Check-out failed: Reservation is already" + currentStatus);
+            return;
+        }
+
+        res.completeReservation(); // Changes the status to "Completed"
+
+        res.getRoom().releaseRoom(); // Releases the room so it becomes available again
+
+        // Show success messages
+        System.out.println("Check-out successful for Reservation #" + res.getReservationId());
+        System.out.println("Guest: " + res.getGuest().getName());
+        System.out.println("Room: " + res.getRoom().getRoomNumber() + " is now available.");
+
+    }
+
+
+
+    // ===== ADDS GUEST TO THE SYSTEM =====
+    public void addGuest(Guest guest) {
+        guestManager.addGuest(guest);
+    }
+
+    // show all guests (for testing)
+    public void showAllGuests() {
+        System.out.println("=== Guests in the system ===");
+        for (Guest g : guestManager.getAllGuests()) {
+            System.out.println("ID: " + g.getId() + " | Name: " + g.getName());
         }
     }
 
-    // only prints a message for now. Doesn't change the status of the reservation yet.
+
 }
