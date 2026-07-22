@@ -1,10 +1,12 @@
 package HotelBooking;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Reservation {
     // === Attributes ===
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private int reservationId;              // Unique number for the booking
     private Guest guest;                    // Which guest made the booking
     private Room room;                      // Which room was booked
@@ -61,8 +63,8 @@ public class Reservation {
         return "Reservation ID: " + reservationId +
                 "\nGuest: " + guest.getName() +
                 "\nRoom: " + room.getRoomNumber() + " (" + room.getType() + ")" +
-                "\nCheck-in: " + checkInDate +
-                "\nCheck-out: "+ checkOutDate +
+                "\nCheck-in: " + checkInDate.format(formatter) +
+                "\nCheck-out: "+ checkOutDate.format(formatter) +
                 "\nBreakfast Included: " + (breakfastIncluded ? "Yes" : "No") +
                 "\nStatus: " + status;
     }
