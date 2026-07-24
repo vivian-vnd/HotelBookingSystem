@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Main {
 
 
-
     public static void main(String[] args) {
         Hotel hotel = new Hotel();      // Create Hotel object
         Scanner scanner = new Scanner(System.in);
@@ -22,7 +21,7 @@ public class Main {
 
         // Create a guest
         Guest guest1 = new Guest("Vivian", "58858870", "iwannaeaticecream.@gmail.com");
-        System.out.println("TestGuestID: " +  guest1.getId());
+        System.out.println("TestGuestID: " + guest1.getId());
         hotel.addGuest(guest1);
         hotel.showAllGuests();
 
@@ -88,7 +87,7 @@ public class Main {
 
                     boolean cancelled = hotel.cancelReservation(reservationId);
 
-                    if  (cancelled) {
+                    if (cancelled) {
                         System.out.println("Reservation Cancelled!");
                     } else {
                         System.out.println("Could not cancel the reservation. Please check the ID and try again.");

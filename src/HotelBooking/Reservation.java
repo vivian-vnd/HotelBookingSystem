@@ -30,25 +30,30 @@ public class Reservation {
     public int getReservationId() {
         return reservationId;
     }
+
     public Guest getGuest() {
         return guest;
     }
+
     public Room getRoom() {
         return room;
     }
+
     public LocalDate getCheckInDate() {
         return checkInDate;
     }
+
     public LocalDate getCheckOutDate() {
         return checkOutDate;
     }
+
     public boolean isBreakfastIncluded() {
         return breakfastIncluded;
     }
+
     public String getStatus() {
         return status;
     }
-
 
 
     // === Methods ===
@@ -64,7 +69,7 @@ public class Reservation {
                 "\nGuest: " + guest.getName() +
                 "\nRoom: " + room.getRoomNumber() + " (" + room.getType() + ")" +
                 "\nCheck-in: " + checkInDate.format(formatter) +
-                "\nCheck-out: "+ checkOutDate.format(formatter) +
+                "\nCheck-out: " + checkOutDate.format(formatter) +
                 "\nBreakfast Included: " + (breakfastIncluded ? "Yes" : "No") +
                 "\nStatus: " + status;
     }
