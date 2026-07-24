@@ -20,7 +20,7 @@ public class Main {
         hotel.addRoom(new Room("103", "Suite", 150.0, "Available"));
 
         // Create a guest
-        Guest guest1 = new Guest("Vivian", "58858870", "iwannaeaticecream.@gmail.com");
+        Guest guest1 = new Guest("Bob", "98873647", "tiramisulover.@gmail.com");
         System.out.println("TestGuestID: " + guest1.getId());
         hotel.addGuest(guest1);
         hotel.showAllGuests();
