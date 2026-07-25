@@ -136,8 +136,17 @@ public class Hotel {
         return null;
     }
 
-    public List<Reservation> getReservations() {
-        return reservations;
+    public void getReservations() {
+        if (reservations.isEmpty()) {
+            System.out.println("No reservations found. To make a reservation, please select 2.");
+            return;
+        }
+
+        for (Reservation reservation : reservations) {
+            System.out.println("\n----------------------------");
+            System.out.println(reservation.getReservationDetails());
+            System.out.println("----------------------------");
+        }
     }
 
     // ===== CHECK-IN/CHECK-OUT =====
