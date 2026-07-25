@@ -75,8 +75,15 @@ public class Main {
             System.out.println("Enter your choice: ");
 
             // Get user choice
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            String choiceInput = scanner.nextLine();
+            int choice;
+
+            try {
+                choice = Integer.parseInt(choiceInput);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid choice. Please enter a number from 1 to 7.");
+                continue;
+            }
 
             // Call appropriate Hotel based on choice
             switch (choice) {
