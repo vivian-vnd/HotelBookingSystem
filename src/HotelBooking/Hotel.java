@@ -205,7 +205,15 @@ public class Hotel {
         }
     }
 
-    // GET PRICE PER NIGHT!!!!
-    public List<Room> getPricePerNight(double getPricePerNight) {
+    // ==== Filtering Price ======
+    public List<Room> getRoomByMaxPrice(double maxPrice) {
+        List<Room> result = new ArrayList<>();
+
+        for (Room room : rooms) {   // Goes through every room in the hotel one by one
+            if (room.isAvailable() && room.getPrice() <= maxPrice) {    // Checks if the room price is less than or equal to the price the user entered
+                result.add(room);
+            }
+        }
+        return result;
     }
 }

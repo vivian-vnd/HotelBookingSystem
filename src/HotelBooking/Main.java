@@ -42,8 +42,13 @@ public class Main {
             System.out.println("Enter your choice: ");
 
             // Get user choice
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            int choice;
+            try {
+                choice =  Integer.parseInt(scanner.nextLine());
+            } catch (Exception e) {
+                System.out.println("Invalid choice. Please enter a number from 1 to 7.");
+                continue;
+            }
 
             // Call appropriate Hotel based on choice
             switch (choice) {
@@ -55,8 +60,13 @@ public class Main {
                     System.out.println("3. Filter by Price per Night");
                     System.out.println("Enter your choice: ");
 
-                    int filterChoice = scanner.nextInt();
-                    scanner.nextLine(); // Clear input buffer
+                    int filterChoice;
+                    try {
+                        filterChoice = Integer.parseInt(scanner.nextLine());
+                    } catch (Exception e) {
+                        System.out.println("Invalid input. Showing all the available rooms.");
+                        filterChoice = 1;
+                    }
 
                     List<Room> filteredRooms = new ArrayList<>();
 
@@ -68,14 +78,18 @@ public class Main {
                         case 2:
                             System.out.println("Enter Room Type (e.g., Single, Double, Suite): ");
                             String type = scanner.nextLine();
-                            filteredRooms = hotel.getAvailableRooms ();
+                            filteredRooms = hotel.getAvailableRoomsByType(type);
                             break;
 
                         case 3:
-                            System.out.println("Enter Price per Night: ");
-                            double getPricePerNight = scanner.nextDouble();
-                            scanner.nextLine(); // Clear input buffer
-                            filteredRooms = hotel.getPricePerNight(getPricePerNight);
+                            try {
+                                System.out.print("Enter maximum price per night: ");
+                                double maxPrice = Double.parseDouble(scanner.nextLine());
+                                filteredRooms = hotel.getRoomByMaxPrice(maxPrice);
+                            } catch (Exception e) {
+                                System.out.println("Invalid price. Showing all the available rooms.");
+                                filteredRooms = hotel.getAvailableRooms();
+                            }
                             break;
 
                         default:
