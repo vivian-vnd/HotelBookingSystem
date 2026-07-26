@@ -2,6 +2,8 @@ package HotelBooking;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -46,11 +48,60 @@ public class Main {
 
             // Call appropriate Hotel based on choice
             switch (choice) {
+
                 case 1: // Randall - View Available Rooms
-                    System.out.println("View  Available Rooms: - not yet implemented");
+                    System.out.println("\n===== View Available Rooms =====");
+                    System.out.println("1. Show All Available Rooms");
+                    System.out.println("2. Filter by Room Type");
+                    System.out.println("3. Filter by Price per Night");
+                    System.out.println("Enter your choice: ");
+
+                    int filterChoice = scanner.nextInt();
+                    scanner.nextLine(); // Clear input buffer
+
+                    List<Room> filteredRooms = new ArrayList<>();
+
+                    switch (filterChoice) {
+                        case 1:
+                            filteredRooms = hotel.getAvailableRooms();
+                            break;
+
+                        case 2:
+                            System.out.println("Enter Room Type (e.g., Single, Double, Suite): ");
+                            String type = scanner.nextLine();
+                            filteredRooms = hotel.getAvailableRooms ();
+                            break;
+
+                        case 3:
+                            System.out.println("Enter Price per Night: ");
+                            double getPricePerNight = scanner.nextDouble();
+                            scanner.nextLine(); // Clear input buffer
+                            filteredRooms = hotel.getPricePerNight(getPricePerNight);
+                            break;
+
+                        default:
+                            System.out.println("Invalid option. Showing all available rooms.");
+                            filteredRooms = hotel.getAvailableRooms();
+                            break;
+                    }
+
+                    // Display Results using println
+                    System.out.println();
+                    if (filteredRooms == null || filteredRooms.isEmpty()) {
+                        System.out.println("No available rooms match your search criteria.");
+                    } else {
+                        System.out.println("Room Number\tRoom Type\tPrice/Night");
+                        System.out.println("------------------------------------------------");
+
+                        for (Room room : filteredRooms) {
+                            System.out.println(room.getRoomNumber() + "\t\t"
+                                    + room.getType() + "\t\t$"
+                                    + room.getPricePerNight());
+                        }
+                    }
                     break;
 
-                case 2: // Vivian - Make a reservation
+                    case 2: // Vivian - Make a reservation
                     System.out.println("\n===== Make a reservation =====");
 
                     System.out.print("Enter Guest ID: ");

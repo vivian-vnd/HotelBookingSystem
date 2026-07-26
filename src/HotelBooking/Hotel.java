@@ -206,5 +206,7 @@ public class Hotel {
         }
     }
 
-
+    // GET PRICE PER NIGHT!!!!
+    public List<Room> getPricePerNight(double getPricePerNight) {
+    }
 }
