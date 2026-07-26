@@ -1,18 +1,18 @@
 package HotelBooking;
 
 public class Guest {
-    private int id;
+    private int guestId;
     private String name;
     private String phoneNumber;
     private String email;
 
     // a static counter to generate ID's it belongs to the class itself and not to one specific object
     // avoids duplicate ID's.
-    private static int nextId;
+    private static int nextId = 1;
 
     public Guest(String name, String phoneNumber, String email) {
         // taking the spaces of
-        name = name.trim();
+        name = name.trim().replaceAll("\s+", " ");
         phoneNumber = phoneNumber.trim();
         email = email.trim();
 
