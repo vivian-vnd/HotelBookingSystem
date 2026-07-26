@@ -1,3 +1,7 @@
+package HotelBooking;
+
+import HotelBooking.Reservation;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -40,7 +44,7 @@ public class Invoice {
 
     // 4. Calculate total grand price
     public double calculateTotalPrice() {
-        return calculateSubtotal();
+        return calculateTotalPrice();
     }
 
     // 5.Mark invoice as paid
@@ -57,9 +61,9 @@ public class Invoice {
         System.out.println("Date:            " + issueDate);
         System.out.println("Status:          " + (isPaid ? "PAID" : "UNPAID"));
         System.out.println("----------------------------------------");
-        System.out.println("Guest ID:        " + reservation.getGuestId());
+        System.out.println("Guest ID:        " + reservation.getGuest().getId());
         System.out.println("Room Number:     " + reservation.getRoom().getRoomNumber());
-        System.out.println("Room Type:       " + reservation.getRoom().getRoomType());
+        System.out.println("Room Type:       " + reservation.getRoom().getType());
         System.out.println("Price / Night:   $" + reservation.getRoom().getPricePerNight());
         System.out.println("Check-In:        " + reservation.getCheckInDate());
         System.out.println("Check-Out:       " + reservation.getCheckOutDate());
@@ -77,6 +81,10 @@ public class Invoice {
         System.out.println("----------------------------------------");
         System.out.println("TOTAL PRICE:     $" + calculateTotalPrice());
         System.out.println("========================================\n");
+    }
+
+    public double calculateSubtotal() {
+        return calculateSubtotal();
     }
 
     // Getters
