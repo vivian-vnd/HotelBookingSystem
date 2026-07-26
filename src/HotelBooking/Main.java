@@ -108,7 +108,7 @@ public class Main {
 
                         for (Room room : filteredRooms) {
                             System.out.println(room.getRoomNumber() + "\t\t"
-                                    + room.getType() + "\t\t$"
+                                    + room.getType() + "\t\t€"
                                     + room.getPricePerNight());
                         }
                     }

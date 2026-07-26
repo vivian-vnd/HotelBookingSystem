@@ -27,7 +27,7 @@ public class Invoice {
 
     // Default breakfast rate €15
     public Invoice(Reservation reservation) {
-        this(reservation, 10.0);
+        this(reservation, 15.0);
     }
 
 
@@ -54,7 +54,7 @@ public class Invoice {
 
     // 4. Calculate subtotal / total price
     public double calculateTotalPrice() {
-        return calculateTotalPrice() + calculateBreakfastTotal();
+        return calculateRoomTotal() + calculateBreakfastTotal();
     }
 
     // 5.Mark invoice as paid

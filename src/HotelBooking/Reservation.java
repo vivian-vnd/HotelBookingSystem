@@ -105,7 +105,7 @@ public class Reservation implements priceable {
         double breakfastCost = 0;
 
         if (this.breakfastIncluded) {
-            breakfastCost = 10.0 * getNumberOfNights();     // €10 per night (can be changed??)
+            breakfastCost = 15.0 * getNumberOfNights();     // €15 per night (can be changed??)
         }
 
         return roomTotal + breakfastCost;

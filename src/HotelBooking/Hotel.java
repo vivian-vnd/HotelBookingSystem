@@ -184,10 +184,16 @@ public class Hotel {
 
         res.getRoom().releaseRoom(); // Releases the room so it becomes available again
 
-        // Show success messages
+        // === Creates and Prints the bill ===
+        Invoice invoice = new Invoice(res);     // uses the default breakfast rate
+        invoice.setPaid(true);
+        invoice.printReceipt();
+
+        // === Successful message ===
         System.out.println("Check-out successful for Reservation #" + res.getReservationId());
         System.out.println("Guest: " + res.getGuest().getName());
-        System.out.println("Room: " + res.getRoom().getRoomNumber() + " is now available.");
+        System.out.println("Room: " + res.getRoom().getRoomNumber() + " is now available");
+
 
     }
 
