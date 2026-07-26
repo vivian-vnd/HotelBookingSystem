@@ -8,6 +8,47 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static String readValidName(Scanner scanner) {
+        while (true) {
+            System.out.print("Enter guest name: ");
+            String guestName = scanner.nextLine();
+
+            try {
+                Guest.validateName(guestName);
+                return guestName.trim().replaceAll("\s+", " ");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private static String readValidPhoneNumber(Scanner scanner) {
+        while (true) {
+            System.out.print("Enter telephone: ");
+            String telephone = scanner.nextLine();
+
+            try {
+                Guest.validatePhoneNumber(telephone);
+                return telephone;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private static String readValidEmail(Scanner scanner) {
+        while (true) {
+            System.out.print("Enter email: ");
+            String email = scanner.nextLine();
+
+            try {
+                Guest.validateEmail(email);
+                return email;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 
     public static void main(String[] args) {
         Hotel hotel = new Hotel();      // Create Hotel object
@@ -20,12 +61,6 @@ public class Main {
         hotel.addRoom(new Room("101", "Single", 50.0, "Available"));
         hotel.addRoom(new Room("102", "Double", 80.0, "Available"));
         hotel.addRoom(new Room("103", "Suite", 150.0, "Available"));
-
-        // Create a guest
-        Guest guest1 = new Guest("Bob", "98873647", "tiramisulover.@gmail.com");
-        System.out.println("TestGuestID: " + guest1.getId());
-        hotel.addGuest(guest1);
-        hotel.showAllGuests();
 
         // ==================================================
 
@@ -124,15 +159,12 @@ public class Main {
                     boolean breakfastIncluded;
 
                     // === Guest ID ===
-                    try {
-                        System.out.print("Enter Guest ID: ");
-                        guestId = scanner.nextInt();
-                        scanner.nextLine();
-                    } catch (Exception e) {
-                        System.out.println("Invalid Guest ID! Please enter a number");
-                        scanner.nextLine();
-                        break;
-                    }
+                    String guestName = readValidName(scanner);
+                    String telephone = readValidPhoneNumber(scanner);
+                    String email = readValidEmail(scanner);
+
+                    Guest newGuest = new Guest(guestName, telephone, email);
+                    hotel.addGuest(newGuest);
 
                     // === Room Number ===
                     System.out.print("Enter Room Number: ");
@@ -163,7 +195,7 @@ public class Main {
                     }
 
                     // === Make the reservation ===
-                    Reservation reservation = hotel.makeReservation(guestId, roomNumber, checkInDate, checkOutDate, breakfastIncluded);
+                    Reservation reservation = hotel.makeReservation(newGuest.getId(), roomNumber, checkInDate, checkOutDate, breakfastIncluded);
                     if (reservation != null) {
                         System.out.println("\nReservation Successful!");
                         System.out.println(reservation.getReservationDetails());
@@ -234,7 +266,12 @@ public class Main {
                     break;
 
                 case 6: // Joana - View all reservation
-                    System.out.println("View All Reservations: (not yet implemented)");
+                   hotel.getReservations();
+                    break;
+
+                case 7:
+                    System.out.println("Goodbye!! Thank your for using the Hotel Booking System!!");
+                    running = false;
                     break;
 
                 default:

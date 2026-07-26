@@ -42,14 +42,4 @@ public class GuestManager {
     public ArrayList<Guest> getAllGuests() {
         return guests;
     }
-
-    // checks whether there are no guests in the collection
-    public boolean isEmpty() {
-        return guests.isEmpty();
-    }
-
-    // returns the number of guests currently stored
-    public int getGuestCount() {
-        return guests.size();
-    }
 }

@@ -10,33 +10,26 @@ public class Guest {
     // avoids duplicate ID's.
     private static int nextId = 1;
 
-    public Guest(String name, String phoneNumber, String email) {
-        // taking the spaces of
+    public Guest (String name, String phoneNumber, String email){
         name = name.trim().replaceAll("\s+", " ");
         phoneNumber = phoneNumber.trim();
         email = email.trim();
 
-        // validate and assign the name
         validateName(name);
-        this.name = name;
-
-        // validate and assign the phoneNumber
         validatePhoneNumber(phoneNumber);
-        this.phoneNumber = phoneNumber;
-
-        // validate and assign the email
         validateEmail(email);
+
+        this.name = name;
+        this.phoneNumber = phoneNumber;
         this.email = email;
 
-        // assigns the current nextId value to this guest
-        this.id = nextId;
-        // increases so the next Guest gets a different one
+        this.guestId = nextId;
         nextId++;
-    }
+        }
 
     // getters
     public int getId() {
-        return id;
+        return guestId;
     }
 
     public String getName() {
@@ -53,13 +46,13 @@ public class Guest {
 
     // setters
     public void setName(String name) {
-        name = name.trim();
+        name = name.trim().replaceAll("\s+", " ");
         validateName(name);
         this.name = name;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        phoneNumber = phoneNumber.trim();
+        phoneNumber= phoneNumber.trim();
         validatePhoneNumber(phoneNumber);
         this.phoneNumber = phoneNumber;
     }
@@ -70,40 +63,40 @@ public class Guest {
         this.email = email;
     }
 
-    private void validateName(String name) {
+    public static void validateName(String name){
         // check if is not null and not blank
-        if (name == null || name.trim().isEmpty()) {
+        if (name == null || name.trim().isEmpty()){
             throw new IllegalArgumentException("Invalid name. Guest name is required. Please enter the guest's name.");
         }
 
         // check if the character is either a letter or space
-        for (int i = 0; i < name.length(); i++) {
+        for (int i = 0; i <name.length(); i++){
             char c = name.charAt(i);
 
-            if (!Character.isLetter(c) && c != ' ') {
+            if (!Character.isLetter(c) && c!= ' '){
                 throw new IllegalArgumentException("Invalid name. Please enter a valid name using letters only.");
             }
         }
     }
 
-    private void validatePhoneNumber(String phoneNumber) {
+    public static void validatePhoneNumber(String phoneNumber){
         // check if the phone number is not null and not blank
-        if (phoneNumber == null || phoneNumber.trim().isEmpty()) {
+        if (phoneNumber == null || phoneNumber.trim().isEmpty()){
             throw new IllegalArgumentException("Invalid phone number. Phone number is required. Please enter the guest's phone number.");
         }
 
         // check if every character is a digit
-        for (int i = 0; i < phoneNumber.length(); i++) {
+        for (int i = 0; i<phoneNumber.length(); i++){
             char c = phoneNumber.charAt(i);
 
-            if (!Character.isDigit(c)) {
+            if (!Character.isDigit(c)){
                 throw new IllegalArgumentException("Invalid phone number. Please enter a valid phone number containing digits only.");
             }
         }
     }
 
-    private void validateEmail(String email) {
-        // checks if the email is empty
+    public static void validateEmail(String email) {
+       // checks if the email is empty
         if (email == null || email.trim().isEmpty()) {
             throw new IllegalArgumentException(
                     "Invalid email. Email is required. Please enter an email address, for example: name@example.com.");
@@ -138,7 +131,7 @@ public class Guest {
     }
 
     @Override
-    public String toString() {
-        return "Guest [ID: " + id + " | Name: " + name + " | Phone Number: " + phoneNumber + " | Email: " + email + "]";
+    public String toString(){
+        return "Guest [ID: " + guestId + " | Name: " + name + " | Phone Number: " + phoneNumber + " | Email: " + email + "]";
     }
 }
