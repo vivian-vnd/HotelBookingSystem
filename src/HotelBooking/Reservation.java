@@ -7,12 +7,12 @@ import java.time.temporal.ChronoUnit;
 public class Reservation implements priceable {
     // === Attributes ===
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    private int reservationId;              // Unique number for the booking
-    private Guest guest;                    // Which guest made the booking
-    private Room room;                      // Which room was booked
-    private LocalDate checkInDate;          // when the guest is staying
-    private LocalDate checkOutDate;
-    private boolean breakfastIncluded;
+    private final int reservationId;              // Unique number for the booking
+    private final Guest guest;                    // Which guest made the booking
+    private final Room room;                      // Which room was booked
+    private final LocalDate checkInDate;          // when the guest is staying
+    private final LocalDate checkOutDate;
+    private final boolean breakfastIncluded;
     private String status;                  // Current status: "Active", "Cancelled", "CheckedIn", "Completed"
 
     // === Constructor ===

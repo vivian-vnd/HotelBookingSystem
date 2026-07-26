@@ -8,9 +8,9 @@ public class Hotel {
     // ==== ATTRIBUTES (Data the Hotel Stores) ======
 
     // This list stores all the rooms in the hotel
-    private ArrayList<Room> rooms;                  // List of all rooms
-    private ArrayList<Reservation> reservations;    // This list stores all the reservations that have been made, every time someone books a room, we add the Reservation object here
-    private GuestManager guestManager;              // Used to find guests
+    private final ArrayList<Room> rooms;                  // List of all rooms
+    private final ArrayList<Reservation> reservations;    // This list stores all the reservations that have been made, every time someone books a room, we add the Reservation object here
+    private final GuestManager guestManager;              // Used to find guests
 
 
     // ====== CONSTRUCTOR =========
