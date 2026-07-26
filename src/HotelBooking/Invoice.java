@@ -1,7 +1,5 @@
 package HotelBooking;
 
-import HotelBooking.Reservation;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -23,9 +21,21 @@ public class Invoice {
         this.isPaid = false;
     }
 
+    // Getters
+    public int getInvoiceId() { return invoiceId; }
+    public Reservation getReservation() { return reservation; }
+
+    // Default breakfast rate €15
+    public invoice(Reservation reservation) {
+        this(reservation, 10.0);
+    }
+
+
     // 1. Calculate number of nights stayed
     public long getNumberOfNights() {
-        long nights = ChronoUnit.DAYS.between(reservation.getCheckInDate(), reservation.getCheckOutDate());
+        long nights = ChronoUnit.DAYS.between(
+                reservation.getCheckInDate(),
+                reservation.getCheckOutDate());
         return (nights > 0) ? nights : 1; // Default to 1 night if check-in & check-out are same day
     }
 
@@ -42,9 +52,9 @@ public class Invoice {
         return 0.0;
     }
 
-    // 4. Calculate total grand price
+    // 4. Calculate subtotal / total price
     public double calculateTotalPrice() {
-        return calculateTotalPrice();
+        return calculateTotalPrice() + calculateBreakfastTotal();
     }
 
     // 5.Mark invoice as paid
@@ -64,31 +74,23 @@ public class Invoice {
         System.out.println("Guest ID:        " + reservation.getGuest().getId());
         System.out.println("Room Number:     " + reservation.getRoom().getRoomNumber());
         System.out.println("Room Type:       " + reservation.getRoom().getType());
-        System.out.println("Price / Night:   $" + reservation.getRoom().getPricePerNight());
+        System.out.println("Price / Night:   €" + reservation.getRoom().getPricePerNight());
         System.out.println("Check-In:        " + reservation.getCheckInDate());
         System.out.println("Check-Out:       " + reservation.getCheckOutDate());
         System.out.println("Nights Stayed:   " + getNumberOfNights());
         System.out.println("----------------------------------------");
-        System.out.println("Room Charge:     $" + calculateRoomTotal());
+        System.out.println("Room Charge:     €" + calculateRoomTotal());
 
         if (reservation.isBreakfastIncluded()) {
-            System.out.println("Breakfast Fee:   $" + calculateBreakfastTotal() + " ($" + breakfastRatePerNight + "/night)");
+            System.out.println("Breakfast Fee:   €" + calculateBreakfastTotal() + " (€" + breakfastRatePerNight + "/night)");
         } else {
-            System.out.println("Breakfast Fee:   $0.0 (Not Included)");
+            System.out.println("Breakfast Fee:   €0.0 (Not Included)");
         }
 
-        System.out.println("Subtotal:        $" + calculateSubtotal());
         System.out.println("----------------------------------------");
-        System.out.println("TOTAL PRICE:     $" + calculateTotalPrice());
+        System.out.println("TOTAL PRICE:     €" + calculateTotalPrice());
         System.out.println("========================================\n");
     }
 
-    public double calculateSubtotal() {
-        return calculateSubtotal();
-    }
 
-    // Getters
-    public int getInvoiceId() { return invoiceId; }
-    public Reservation getReservation() { return reservation; }
-    public boolean isPaid() { return isPaid; }
 }
