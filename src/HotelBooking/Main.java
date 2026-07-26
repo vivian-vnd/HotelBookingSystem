@@ -57,11 +57,12 @@ public class Main {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         // ====TEMPORARY SETUP FOR TESTING===============
-
-        hotel.addRoom(new Room("101", "Single", 50.0, "Available"));
-        hotel.addRoom(new Room("102", "Double", 80.0, "Available"));
-        hotel.addRoom(new Room("103", "Suite", 150.0, "Available"));
-
+        hotel.addRoom(new SingleRoom("101", "Available"));
+        hotel.addRoom(new DoubleRoom("102", "Available"));
+        hotel.addRoom(new DeluxeRoom("103", "Available"));
+        hotel.addRoom(new SuiteRoom("201", "Available"));
+        hotel.addRoom(new SingleRoom("104", "Available"));
+        hotel.addRoom(new DoubleRoom("105", "Available"));
         // ==================================================
 
         while (running) {
@@ -144,7 +145,7 @@ public class Main {
                         for (Room room : filteredRooms) {
                             System.out.println(room.getRoomNumber() + "\t\t"
                                     + room.getType() + "\t\t€"
-                                    + room.getPricePerNight());
+                                    + room.getPrice());
                         }
                     }
                     break;

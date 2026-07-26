@@ -1,6 +1,6 @@
 package HotelBooking;
 
-public abstract class Room implements priceable {
+public abstract class Room implements Priceable {
     private String roomNumber;
     private String status;
 

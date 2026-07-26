@@ -46,7 +46,7 @@ public class Invoice {
 
     // 2. Calculate room cost: (price per night) * (number of nights)
     public double calculateRoomTotal() {
-        return reservation.getRoom().getPricePerNight() * getNumberOfNights();
+        return reservation.getRoom().getPrice() * getNumberOfNights();
     }
 
     // 3. Calculate breakfast cost: (breakfast rate) * (number of nights) if selected
@@ -79,7 +79,7 @@ public class Invoice {
         System.out.println("Guest ID:        " + reservation.getGuest().getId());
         System.out.println("Room Number:     " + reservation.getRoom().getRoomNumber());
         System.out.println("Room Type:       " + reservation.getRoom().getType());
-        System.out.println("Price / Night:   €" + reservation.getRoom().getPricePerNight());
+        System.out.println("Price / Night:   €" + reservation.getRoom().getPrice());
         System.out.println("Check-In:        " + reservation.getCheckInDate().format(formatter));
         System.out.println("Check-Out:       " + reservation.getCheckOutDate().format(formatter));
         System.out.println("Nights Stayed:   " + getNumberOfNights());

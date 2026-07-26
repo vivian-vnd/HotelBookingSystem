@@ -101,7 +101,7 @@ public class Reservation implements Priceable {
     // Polymorphism method from Priceable interface
     @Override
     public double getPrice() {
-        double roomTotal = room.getPricePerNight() * getNumberOfNights();
+        double roomTotal = room.getPrice() * getNumberOfNights();
         double breakfastCost = 0;
         
 
