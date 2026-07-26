@@ -173,27 +173,38 @@ public class Main {
 
                     // === Date input ===
 
-                    try {
-                        System.out.print("Enter Check-in Date (dd-MM-yyyy): ");
-                        checkInDate = LocalDate.parse(scanner.nextLine(), formatter);
+                        // check in date
+                        while (true) {
+                            try {
+                                System.out.print("Enter Check-in Date (dd-MM-yyyy): ");
+                                checkInDate = LocalDate.parse(scanner.nextLine(), formatter);
+                                break;  // correct date -> leave the loop
+                            } catch (Exception e) {
+                                System.out.println("Invalid date format! Please use dd-MM-yyyy (example: 25-07-2026)");
+                            }
+                        }
 
-                        System.out.print("Enter Check-out Date (dd-MM-yyyy): ");
-                        checkOutDate = LocalDate.parse(scanner.nextLine(), formatter);
-                    } catch (Exception e) {
-                        System.out.println("Invalid date format! Please use dd-MM-yyyy (example: 25-07-2026)");
-                        break;  // Go back to menu
-                    }
+                        // check out date
+                        while (true) {
+                            try {
+                                System.out.print("Enter Check-out Date (dd-MM-yyyy): ");
+                                checkOutDate = LocalDate.parse(scanner.nextLine(), formatter);
+                                break;
+                            } catch (Exception e) {
+                                System.out.println("Invalid date format! Please use dd-MM-yyyy (example: 25-07-2026)");
+                            }
+                        }
 
                     // === Breakfast ===
-                    try {
-                        System.out.print("Include Breakfast? (true/false): ");
-                        breakfastIncluded = scanner.nextBoolean();
-                        scanner.nextLine();
-                    } catch (Exception e) {
-                        System.out.println("Invalid breakfast included! Please type only true or false");
-                        scanner.nextLine();
-                        break;
-                    }
+                        while (true) {
+                            try {
+                                System.out.print("Include Breakfast? (true/false): ");
+                                breakfastIncluded = Boolean.parseBoolean(scanner.nextLine().trim());
+                                break;
+                            } catch (Exception e) {
+                                System.out.println("Invalid input! Please use true or false.");
+                            }
+                        }
 
                     // === Make the reservation ===
                     Reservation reservation = hotel.makeReservation(newGuest.getId(), roomNumber, checkInDate, checkOutDate, breakfastIncluded);
@@ -232,39 +243,26 @@ public class Main {
                 case 4: // Collins - Check-in
                     System.out.println("\n===== Check-In =====");
 
-                    int checkInId;
-
-                    try {
-                        System.out.print("Enter Reservation ID for Check-in: ");
-                        checkInId = scanner.nextInt();
-                        scanner.nextLine();
-                    } catch (Exception e) {
-                        System.out.println("Invalid input! Please enter a number for Reservation ID");
-                        scanner.nextLine();
-                        break;
-                    }
+                    System.out.print("Enter Reservation ID for Check-in: ");
+                    int checkInId = scanner.nextInt();
+                    scanner.nextLine(); //consume newline
 
                     hotel.checkIn(checkInId);
                     break;
 
+
                 case 5: // Collins - Check-out
                     System.out.println("\n===== Check-Out  =====");
 
-                    int checkOutId;
-
-                    try {
-                        System.out.print("Enter Reservation ID for Check-out: ");
-                        checkOutId = scanner.nextInt();
-                        scanner.nextLine();
-                    } catch (Exception e) {
-                        System.out.println("Invalid input! Please enter a number for Reservation ID");
-                        scanner.nextLine();
-                        break;
-                    }
-
+                    System.out.print("Enter Reservation ID for Check-out: ");
+                    int checkOutId = scanner.nextInt();
 
                     hotel.checkOut(checkOutId);
                     break;
+
+
+
+
 
                 case 6: // Joana - View all reservation
                    hotel.getReservations();

@@ -153,16 +153,16 @@ public class Hotel {
 
     // Checks in a guest using reservation ID
     // Changes the status from "Active" to "CheckedIn"
-    public void checkIn(int reservationId) {
+    public boolean checkIn(int reservationId) {
         Reservation res = getReservationById(reservationId);    // Find the reservation by ID
         if (res == null) {                                      // Check if the reservation exist
-            System.out.println("Check-in not found: Reservation not found");
-            return;
+            System.out.println("Check-in failed: Reservation not found");
+            return false;
         }
 
         if (!res.isActive()) {          // Check if the reservation is still Active
             System.out.println("Check-in failed: Reservation is not active (current status: " + res.getStatus() + ")");
-            return;
+            return false;
         }
 
         res.checkIn(); // Change status to "CheckedIn"
@@ -170,23 +170,24 @@ public class Hotel {
         System.out.println("Check-in successful for Reservation #" + res.getReservationId());
         System.out.println("Guest: " + res.getGuest().getName());
         System.out.println("Room: " + res.getRoom().getRoomNumber());
+        return true;
     }
 
     // Checks out a guest using reservation ID
     // Changes the status to "Completed" and frees the room
-    public void checkOut(int reservationId) {
+    public boolean checkOut(int reservationId) {
         Reservation res = getReservationById(reservationId);
 
         if (res == null) {      // Checks if the reservation exists
             System.out.println("Check-out failed: Reservation not found");
-            return;
+            return false;
         }
 
         String currentStatus = res.getStatus(); // Get current status
 
         if (currentStatus.equals("Completed") || currentStatus.equals("Cancelled")) {    // Prevents check-out if already completed or cancelled
             System.out.println("Check-out failed: Reservation is already" + currentStatus);
-            return;
+            return false;
         }
 
         res.completeReservation(); // Changes the status to "Completed"
@@ -202,6 +203,7 @@ public class Hotel {
         System.out.println("Check-out successful for Reservation #" + res.getReservationId());
         System.out.println("Guest: " + res.getGuest().getName());
         System.out.println("Room: " + res.getRoom().getRoomNumber() + " is now available");
+        return true;
 
 
     }
