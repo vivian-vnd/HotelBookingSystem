@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class Reservation implements priceable {
+public class Reservation implements Priceable {
     // === Attributes ===
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private final int reservationId;              // Unique number for the booking
@@ -103,10 +103,7 @@ public class Reservation implements priceable {
     public double getPrice() {
         double roomTotal = room.getPricePerNight() * getNumberOfNights();
         double breakfastCost = 0;
-
-        if (this.breakfastIncluded) {
-            breakfastCost = 15.0 * getNumberOfNights();     // €15 per night (can be changed??)
-        }
+        
 
         return roomTotal + breakfastCost;
     }

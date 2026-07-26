@@ -1,5 +1,5 @@
 package HotelBooking;
 
-public interface priceable {
+public interface Priceable {
     double getPrice();
 }

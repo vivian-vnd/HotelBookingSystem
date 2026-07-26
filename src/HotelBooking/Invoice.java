@@ -1,6 +1,7 @@
 package HotelBooking;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Invoice {
@@ -11,9 +12,13 @@ public class Invoice {
     private final LocalDate issueDate;
     private final double breakfastRatePerNight; // Cost per night for breakfast
     private boolean isPaid;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     // Constructor
     public Invoice(Reservation reservation, double breakfastRatePerNight) {
+        if (reservation == null) {
+            throw new IllegalArgumentException("reservation cannot be null when creating Invoice.");
+        }
         this.invoiceId = idCounter++;
         this.reservation = reservation;
         this.issueDate = LocalDate.now();
@@ -75,8 +80,8 @@ public class Invoice {
         System.out.println("Room Number:     " + reservation.getRoom().getRoomNumber());
         System.out.println("Room Type:       " + reservation.getRoom().getType());
         System.out.println("Price / Night:   €" + reservation.getRoom().getPricePerNight());
-        System.out.println("Check-In:        " + reservation.getCheckInDate());
-        System.out.println("Check-Out:       " + reservation.getCheckOutDate());
+        System.out.println("Check-In:        " + reservation.getCheckInDate().format(formatter));
+        System.out.println("Check-Out:       " + reservation.getCheckOutDate().format(formatter));
         System.out.println("Nights Stayed:   " + getNumberOfNights());
         System.out.println("----------------------------------------");
         System.out.println("Room Charge:     €" + calculateRoomTotal());
