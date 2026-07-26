@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class Reservation {
+public class Reservation implements priceable {
     // === Attributes ===
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private int reservationId;              // Unique number for the booking
@@ -30,25 +30,30 @@ public class Reservation {
     public int getReservationId() {
         return reservationId;
     }
+
     public Guest getGuest() {
         return guest;
     }
+
     public Room getRoom() {
         return room;
     }
+
     public LocalDate getCheckInDate() {
         return checkInDate;
     }
+
     public LocalDate getCheckOutDate() {
         return checkOutDate;
     }
+
     public boolean isBreakfastIncluded() {
         return breakfastIncluded;
     }
+
     public String getStatus() {
         return status;
     }
-
 
 
     // === Methods ===
@@ -64,7 +69,7 @@ public class Reservation {
                 "\nGuest: " + guest.getName() +
                 "\nRoom: " + room.getRoomNumber() + " (" + room.getType() + ")" +
                 "\nCheck-in: " + checkInDate.format(formatter) +
-                "\nCheck-out: "+ checkOutDate.format(formatter) +
+                "\nCheck-out: " + checkOutDate.format(formatter) +
                 "\nBreakfast Included: " + (breakfastIncluded ? "Yes" : "No") +
                 "\nStatus: " + status;
     }
@@ -91,5 +96,18 @@ public class Reservation {
         if (this.status.equals("CheckedIn") || this.status.equals("Active")) {      // Same goes for this
             this.status = "Completed";                                              // Only used when guest is checking out
         }
+    }
+
+    // Polymorphism method from Priceable interface
+    @Override
+    public double getPrice() {
+        double roomTotal = room.getPricePerNight() * getNumberOfNights();
+        double breakfastCost = 0;
+
+        if (this.breakfastIncluded) {
+            breakfastCost = 10.0 * getNumberOfNights();     // €10 per night (can be changed??)
+        }
+
+        return roomTotal + breakfastCost;
     }
 }

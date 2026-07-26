@@ -1,6 +1,6 @@
 package HotelBooking;
 
-public class Room {
+public class Room implements priceable {
     private String roomNumber;
     private String type;
     private double pricePerNight;
@@ -76,6 +76,12 @@ public class Room {
     // Mark the room as available again (after cancellation or checkout)
     public void releaseRoom() {
         this.status = "Available";
+    }
+
+    // Polymorphism method from Priceable interface
+    @Override
+    public double getPrice() {
+        return pricePerNight;
     }
 
     // ====== PRINTING =======
