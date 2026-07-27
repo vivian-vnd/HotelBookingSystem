@@ -103,7 +103,7 @@ public class Reservation implements Priceable {
     public double getPrice() {
         double roomTotal = room.getPrice() * getNumberOfNights();
         double breakfastCost = 0;
-        
+
 
         return roomTotal + breakfastCost;
     }

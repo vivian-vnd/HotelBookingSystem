@@ -25,7 +25,7 @@ public class Guest {
 
         this.guestId = nextId;
         nextId++;
-        }
+    }
 
     // getters
     public int getId() {
@@ -96,7 +96,7 @@ public class Guest {
     }
 
     public static void validateEmail(String email) {
-       // checks if the email is empty
+        // checks if the email is empty
         if (email == null || email.trim().isEmpty()) {
             throw new IllegalArgumentException(
                     "Invalid email. Email is required. Please enter an email address, for example: name@example.com.");

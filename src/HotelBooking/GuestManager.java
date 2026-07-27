@@ -5,22 +5,22 @@ import java.util.ArrayList;
 public class GuestManager {
     private ArrayList<Guest> guests;
 
-    public GuestManager(){
+    public GuestManager() {
         guests = new ArrayList<Guest>();
     }
 
     // add guest to the list
-    public void addGuest(Guest guest){
-        if (guest == null){
+    public void addGuest(Guest guest) {
+        if (guest == null) {
             throw new IllegalArgumentException("Please provide a valid Guest to be added.");
         }
         guests.add(guest);
     }
 
     // find guest by ID
-    public Guest findGuestById(int id){
-        for (Guest guest : guests){
-            if (guest.getId() == id){
+    public Guest findGuestById(int id) {
+        for (Guest guest : guests) {
+            if (guest.getId() == id) {
                 return guest;
             }
         }
@@ -28,9 +28,9 @@ public class GuestManager {
     }
 
     // remove guest by ID
-    public boolean removeGuestById(int id){
-        for (int i = 0; i< guests.size(); i++){
-            if (guests.get(i).getId() == id){
+    public boolean removeGuestById(int id) {
+        for (int i = 0; i < guests.size(); i++) {
+            if (guests.get(i).getId() == id) {
                 guests.remove(i);
                 return true;
             }
@@ -39,8 +39,7 @@ public class GuestManager {
     }
 
     // return the list of guests
-    public ArrayList<Guest> getAllGuests(){
+    public ArrayList<Guest> getAllGuests() {
         return guests;
     }
-
 }
