@@ -1,0 +1,21 @@
+RoomNumber,Type,Price,Status
+101,Single Room,50.00,Available
+102,Single Room,50.00,Booked
+103,Single Room,55.00,Available
+104,Single Room,55.00,Available
+105,Single Room,60.00,Booked
+201,Double Room,85.00,Available
+202,Double Room,85.00,Available
+203,Double Room,90.00,Booked
+204,Double Room,90.00,Available
+205,Double Room,95.00,Available
+206,Double Room,95.00,Booked
+301,Deluxe Room,140.00,Available
+302,Deluxe Room,140.00,Booked
+303,Deluxe Room,150.00,Available
+304,Deluxe Room,150.00,Available
+305,Deluxe Room,160.00,Available
+401,Suite,250.00,Available
+402,Suite,275.00,Booked
+403,Suite,300.00,Available
+404,Suite,350.00,Available
