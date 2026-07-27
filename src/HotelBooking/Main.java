@@ -2,12 +2,9 @@ package HotelBooking;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-
     private static String readValidName(Scanner scanner) {
         while (true) {
             System.out.print("Enter guest name: ");
@@ -50,6 +47,7 @@ public class Main {
         }
     }
 
+
     public static void main(String[] args) {
         Hotel hotel = new Hotel();      // Create Hotel object
         Scanner scanner = new Scanner(System.in);
@@ -57,12 +55,11 @@ public class Main {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         // ====TEMPORARY SETUP FOR TESTING===============
-        hotel.addRoom(new SingleRoom("101", "Available"));
-        hotel.addRoom(new DoubleRoom("102", "Available"));
-        hotel.addRoom(new DeluxeRoom("103", "Available"));
-        hotel.addRoom(new SuiteRoom("201", "Available"));
-        hotel.addRoom(new SingleRoom("104", "Available"));
-        hotel.addRoom(new DoubleRoom("105", "Available"));
+
+        hotel.addRoom(new Room("101", "Single", 50.0, "Available"));
+        hotel.addRoom(new Room("102", "Double", 80.0, "Available"));
+        hotel.addRoom(new Room("103", "Suite", 150.0, "Available"));
+
         // ==================================================
 
         while (running) {
@@ -78,88 +75,18 @@ public class Main {
             System.out.println("Enter your choice: ");
 
             // Get user choice
-            int choice;
-            try {
-                choice =  Integer.parseInt(scanner.nextLine());
-            } catch (Exception e) {
-                System.out.println("Invalid choice. Please enter a number from 1 to 7.");
-                continue;
-            }
+            int choice = scanner.nextInt();
+            scanner.nextLine();
 
             // Call appropriate Hotel based on choice
             switch (choice) {
-
                 case 1: // Randall - View Available Rooms
-                    System.out.println("\n===== View Available Rooms =====");
-                    System.out.println("1. Show All Available Rooms");
-                    System.out.println("2. Filter by Room Type");
-                    System.out.println("3. Filter by Price per Night");
-                    System.out.println("Enter your choice: ");
-
-                    int filterChoice;
-                    try {
-                        filterChoice = Integer.parseInt(scanner.nextLine());
-                    } catch (Exception e) {
-                        System.out.println("Invalid input. Showing all the available rooms.");
-                        filterChoice = 1;
-                    }
-
-                    List<Room> filteredRooms = new ArrayList<>();
-
-                    switch (filterChoice) {
-                        case 1:
-                            filteredRooms = hotel.getAvailableRooms();
-                            break;
-
-                        case 2:
-                            System.out.println("Enter Room Type (e.g., Single, Double, Suite): ");
-                            String type = scanner.nextLine();
-                            filteredRooms = hotel.getAvailableRoomsByType(type);
-                            break;
-
-                        case 3:
-                            try {
-                                System.out.print("Enter maximum price per night: ");
-                                double maxPrice = Double.parseDouble(scanner.nextLine());
-                                filteredRooms = hotel.getRoomByMaxPrice(maxPrice);
-                            } catch (Exception e) {
-                                System.out.println("Invalid price. Showing all the available rooms.");
-                                filteredRooms = hotel.getAvailableRooms();
-                            }
-                            break;
-
-                        default:
-                            System.out.println("Invalid option. Showing all available rooms.");
-                            filteredRooms = hotel.getAvailableRooms();
-                            break;
-                    }
-
-                    // Display Results using println
-                    System.out.println();
-                    if (filteredRooms == null || filteredRooms.isEmpty()) {
-                        System.out.println("No available rooms match your search criteria.");
-                    } else {
-                        System.out.println("Room Number\tRoom Type\tPrice/Night");
-                        System.out.println("------------------------------------------------");
-
-                        for (Room room : filteredRooms) {
-                            System.out.println(room.getRoomNumber() + "\t\t"
-                                    + room.getType() + "\t\t€"
-                                    + room.getPrice());
-                        }
-                    }
+                    System.out.println("View  Available Rooms: - not yet implemented");
                     break;
 
-                    case 2: // Vivian - Make a reservation
+                case 2: // Vivian - Make a reservation
                     System.out.println("\n===== Make a reservation =====");
 
-                    int guestId;
-                    String roomNumber;
-                    LocalDate checkInDate = null;
-                    LocalDate checkOutDate = null;
-                    boolean breakfastIncluded;
-
-                    // === Guest ID ===
                     String guestName = readValidName(scanner);
                     String telephone = readValidPhoneNumber(scanner);
                     String email = readValidEmail(scanner);
@@ -167,46 +94,19 @@ public class Main {
                     Guest newGuest = new Guest(guestName, telephone, email);
                     hotel.addGuest(newGuest);
 
-                    // === Room Number ===
                     System.out.print("Enter Room Number: ");
-                    roomNumber = scanner.nextLine();
+                    String roomNumber = scanner.nextLine();
 
-                    // === Date input ===
+                    System.out.print("Enter Check-in Date (dd-mm-yyyy): ");
+                    LocalDate checkInDate = LocalDate.parse(scanner.nextLine(), formatter);
 
-                        // check in date
-                        while (true) {
-                            try {
-                                System.out.print("Enter Check-in Date (dd-MM-yyyy): ");
-                                checkInDate = LocalDate.parse(scanner.nextLine(), formatter);
-                                break;  // correct date -> leave the loop
-                            } catch (Exception e) {
-                                System.out.println("Invalid date format! Please use dd-MM-yyyy (example: 25-07-2026)");
-                            }
-                        }
+                    System.out.print("Enter Check-out Date (dd-mm-yyyy): ");
+                    LocalDate checkOutDate = LocalDate.parse(scanner.nextLine(), formatter);
 
-                        // check out date
-                        while (true) {
-                            try {
-                                System.out.print("Enter Check-out Date (dd-MM-yyyy): ");
-                                checkOutDate = LocalDate.parse(scanner.nextLine(), formatter);
-                                break;
-                            } catch (Exception e) {
-                                System.out.println("Invalid date format! Please use dd-MM-yyyy (example: 25-07-2026)");
-                            }
-                        }
+                    System.out.println("Include Breakfast? (true/false): ");
+                    boolean breakfastIncluded = scanner.nextBoolean();
+                    scanner.nextLine();
 
-                    // === Breakfast ===
-                        while (true) {
-                            try {
-                                System.out.print("Include Breakfast? (true/false): ");
-                                breakfastIncluded = Boolean.parseBoolean(scanner.nextLine().trim());
-                                break;
-                            } catch (Exception e) {
-                                System.out.println("Invalid input! Please use true or false.");
-                            }
-                        }
-
-                    // === Make the reservation ===
                     Reservation reservation = hotel.makeReservation(newGuest.getId(), roomNumber, checkInDate, checkOutDate, breakfastIncluded);
                     if (reservation != null) {
                         System.out.println("\nReservation Successful!");
@@ -219,30 +119,20 @@ public class Main {
                 case 3: // Vivian - Cancel a reservation
                     System.out.println("\n===== Cancel a reservation =====");
 
-                    int reservationId;
-
-                    try {
-                        System.out.print("Enter Reservation ID to cancel: ");
-                        reservationId = scanner.nextInt();
-                        scanner.nextLine();
-                    } catch (Exception e) {
-                        System.out.println("Invalid reservation ID! Please enter a number for Reservation ID");
-                        scanner.nextLine();
-                        break;
-                    }
+                    System.out.print("Enter Reservation ID to cancel: ");
+                    int reservationId = scanner.nextInt();
+                    scanner.nextLine();
 
                     boolean cancelled = hotel.cancelReservation(reservationId);
 
-                    if (cancelled) {
-                        System.out.println("Reservation #" + reservationId + " has been cancelled!");
+                    if  (cancelled) {
+                        System.out.println("Reservation Cancelled!");
                     } else {
                         System.out.println("Could not cancel the reservation. Please check the ID and try again.");
                     }
                     break;
 
                 case 4: // Collins - Check-in
-                    System.out.println("\n===== Check-In =====");
-
                     System.out.print("Enter Reservation ID for Check-in: ");
                     int checkInId = scanner.nextInt();
                     scanner.nextLine(); //consume newline
@@ -250,27 +140,21 @@ public class Main {
                     hotel.checkIn(checkInId);
                     break;
 
-
                 case 5: // Collins - Check-out
-                    System.out.println("\n===== Check-Out  =====");
-
                     System.out.print("Enter Reservation ID for Check-out: ");
                     int checkOutId = scanner.nextInt();
+                    scanner.nextLine(); // consume newline
 
                     hotel.checkOut(checkOutId);
                     break;
 
-
-
-
-
                 case 6: // Joana - View all reservation
-                   hotel.getReservations();
+                    hotel.getReservations();
                     break;
 
                 case 7:
-                    System.out.println("Goodbye!! Thank your for using the Hotel Booking System!!");
                     running = false;
+                    System.out.println("Exiting program...");
                     break;
 
                 default:
