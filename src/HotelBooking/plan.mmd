@@ -1,39 +1,120 @@
 classDiagram
+    class Priceable {
+        <<interface>>
+        +getPrice() double
+    }
+
     class Room {
-        - roomNumber
-        - type
-        - pricePerNight
-        - status
+        <<abstract>>
+        -roomNumber: String
+        -status: String
+        -price: double
+        +getRoomNumber() String
+        +getStatus() String
+        +getPrice() double
+        +getType()* String
+        +isAvailable() boolean
+        +bookRoom() void
+        +releaseRoom() void
+    }
+
+    class SingleRoom {
+        +getType() String
+    }
+
+    class DoubleRoom {
+        +getType() String
+    }
+
+    class DeluxeRoom {
+        +getType() String
+    }
+
+    class SuiteRoom {
+        -luxuryTax: double
+        +getType() String
     }
 
     class Guest {
-        - name
-        - phone
-        - email
+        -id: int
+        -name: String
+        -phoneNumber: String
+        -email: String
+        +getId() int
+        +getName() String
+        +validateName() void
+        +validatePhoneNumber() void
+        +validateEmail() void
+    }
+
+    class GuestManager {
+        -guests: ArrayList~Guest~
+        +addGuest(Guest) void
+        +findGuestById(int) Guest
+        +removeGuestById(int) boolean
+        +getAllGuest() ArrayList
     }
 
     class Reservation {
-        - checkInDate
-        - checkOutDate
-        - breakfastIncluded
-    }
-
-    class Hotel {
-        - rooms
-        - reservation
+        -reservationId: int
+        -guest: Guest
+        -room: Room
+        -checkInDate: LocalDate
+        -checkOutDate: LocalDate
+        -breakfastIncluded: boolean
+        -status: String
+        +getNumberOfNights() int
+        +getReservationDetails() String
+        +checkIn() void
+        +completeReservation() void
+        +cancelReservation() void
+        +getPrice() double
     }
 
     class Invoice {
+        -invoiceId: int
+        -reservation: Reservation
+        -issueDate: LocalDate
+        -breakfastRatePerNight: double
+        -isPaid: boolean
+        +calculateRoomTotal() double
+        +calculateBreakfastTotal() double
+        +calculateTotalPrice() double
+        +printReceipt() void
+        +setPaid(boolean) void
+    }
+
+    class Hotel {
+        -rooms: ArrayList~Room~
+        -reservations: ArrayList~Reservation~
+        -guestManager: GuestManager
+        +addRoom(Room) void
+        +getAvailableRooms() List
+        +getAvailableRoomsByType(String) List
+        +getRoomByMaxPrice(double) List
+        +makeReservation() Reservation
+        +cancelReservation(int) boolean
+        +checkIn(int) boolean
+        +checkOut(int) boolean
+        +addGuest(Guest) void
     }
 
     class Main {
-
+        +main(String[]) void
     }
 
-    %% Relationships
-    Hotel "1" *-- "0..*" Room
-    Hotel "1" *-- "0..*" Reservation
-    Reservation "1" *-- "1" Guest
-    Reservation "1" *-- "1" Room
-    Hotel --> Invoice
-    Invoice ..> Reservation
+    Priceable <|.. Room
+    Priceable <|.. Reservation
+    Room <|-- SingleRoom
+    Room <|-- DoubleRoom
+    Room <|-- DeluxeRoom
+    Room <|-- SuiteRoom
+
+    Hotel "1" *-- "many" Room : contains
+    Hotel "1" *-- "many" Reservation : manages
+    Hotel "1" *-- "1" GuestManager : uses
+    GuestManager "1" *-- "many" Guest : manages
+    Reservation "1" --> "1" Guest : has
+    Reservation "1" --> "1" Room : books
+    Invoice "1" --> "1" Reservation : bills
+    Main --> Hotel : controls
