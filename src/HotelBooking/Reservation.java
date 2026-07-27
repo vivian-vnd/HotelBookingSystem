@@ -4,15 +4,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class Reservation {
+public class Reservation implements Priceable {
     // === Attributes ===
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    private int reservationId;              // Unique number for the booking
-    private Guest guest;                    // Which guest made the booking
-    private Room room;                      // Which room was booked
-    private LocalDate checkInDate;          // when the guest is staying
-    private LocalDate checkOutDate;
-    private boolean breakfastIncluded;
+    private final int reservationId;              // Unique number for the booking
+    private final Guest guest;                    // Which guest made the booking
+    private final Room room;                      // Which room was booked
+    private final LocalDate checkInDate;          // when the guest is staying
+    private final LocalDate checkOutDate;
+    private final boolean breakfastIncluded;
     private String status;                  // Current status: "Active", "Cancelled", "CheckedIn", "Completed"
 
     // === Constructor ===
@@ -30,25 +30,30 @@ public class Reservation {
     public int getReservationId() {
         return reservationId;
     }
+
     public Guest getGuest() {
         return guest;
     }
+
     public Room getRoom() {
         return room;
     }
+
     public LocalDate getCheckInDate() {
         return checkInDate;
     }
+
     public LocalDate getCheckOutDate() {
         return checkOutDate;
     }
+
     public boolean isBreakfastIncluded() {
         return breakfastIncluded;
     }
+
     public String getStatus() {
         return status;
     }
-
 
 
     // === Methods ===
@@ -64,7 +69,7 @@ public class Reservation {
                 "\nGuest: " + guest.getName() +
                 "\nRoom: " + room.getRoomNumber() + " (" + room.getType() + ")" +
                 "\nCheck-in: " + checkInDate.format(formatter) +
-                "\nCheck-out: "+ checkOutDate.format(formatter) +
+                "\nCheck-out: " + checkOutDate.format(formatter) +
                 "\nBreakfast Included: " + (breakfastIncluded ? "Yes" : "No") +
                 "\nStatus: " + status;
     }
@@ -91,5 +96,15 @@ public class Reservation {
         if (this.status.equals("CheckedIn") || this.status.equals("Active")) {      // Same goes for this
             this.status = "Completed";                                              // Only used when guest is checking out
         }
+    }
+
+    // Polymorphism method from Priceable interface
+    @Override
+    public double getPrice() {
+        double roomTotal = room.getPrice() * getNumberOfNights();
+        double breakfastCost = 0;
+
+
+        return roomTotal + breakfastCost;
     }
 }

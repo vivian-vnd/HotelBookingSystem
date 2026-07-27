@@ -9,11 +9,11 @@ public class Main {
     private static String readValidName(Scanner scanner) {
         while (true) {
             System.out.print("Enter guest name: ");
-            String name = scanner.nextLine();
+            String guestName = scanner.nextLine();
 
             try {
-                Guest.validateName(name);
-                return name.trim().replaceAll("\s+", " ");
+                Guest.validateName(guestName);
+                return guestName.trim().replaceAll("\s+", " ");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -94,11 +94,11 @@ public class Main {
                 case 2: // Vivian - Make a reservation
                     System.out.println("\n===== Make a reservation =====");
 
-                    String name = readValidName(scanner);
+                    String guestName = readValidName(scanner);
                     String telephone = readValidPhoneNumber(scanner);
                     String email = readValidEmail(scanner);
 
-                    Guest newGuest = new Guest(name, telephone, email);
+                    Guest newGuest = new Guest(guestName, telephone, email);
                     hotel.addGuest(newGuest);
 
                     System.out.print("Enter Room Number: ");
