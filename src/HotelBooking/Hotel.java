@@ -186,7 +186,7 @@ public class Hotel {
         String currentStatus = res.getStatus(); // Get current status
 
         if (currentStatus.equals("Completed") || currentStatus.equals("Cancelled")) {    // Prevents check-out if already completed or cancelled
-            System.out.println("Check-out failed: Reservation is already" + currentStatus);
+            System.out.println("Check-out failed: Reservation is already " + currentStatus);
             return false;
         }
 

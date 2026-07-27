@@ -152,8 +152,7 @@ public class Main {
 
                 case 2: // Vivian - Make a reservation
                     System.out.println("\n===== Make a reservation =====");
-
-                    int guestId;
+                    ;
                     String roomNumber;
                     LocalDate checkInDate = null;
                     LocalDate checkOutDate = null;
@@ -189,6 +188,11 @@ public class Main {
                         try {
                             System.out.print("Enter Check-out Date (dd-MM-yyyy): ");
                             checkOutDate = LocalDate.parse(scanner.nextLine(), formatter);
+
+                            if (!checkOutDate.isAfter(checkInDate)) {
+                                System.out.println("Check-out date must be after check-in date!");
+                                continue;
+                            }
                             break;
                         } catch (Exception e) {
                             System.out.println("Invalid date format! Please use dd-MM-yyyy (example: 25-07-2026)");
@@ -219,50 +223,57 @@ public class Main {
                 case 3: // Vivian - Cancel a reservation
                     System.out.println("\n===== Cancel a reservation =====");
 
-                    int reservationId;
+                    while (true) {
+                        try {
+                            System.out.print("Enter Reservation ID to cancel: ");
+                            int reservationId = Integer.parseInt(scanner.nextLine());
 
-                    try {
-                        System.out.print("Enter Reservation ID to cancel: ");
-                        reservationId = scanner.nextInt();
-                        scanner.nextLine();
-                    } catch (Exception e) {
-                        System.out.println("Invalid reservation ID! Please enter a number for Reservation ID");
-                        scanner.nextLine();
-                        break;
-                    }
+                            boolean cancelled = hotel.cancelReservation(reservationId);
 
-                    boolean cancelled = hotel.cancelReservation(reservationId);
-
-                    if (cancelled) {
-                        System.out.println("Reservation #" + reservationId + " has been cancelled!");
-                    } else {
-                        System.out.println("Could not cancel the reservation. Please check the ID and try again.");
+                            if (cancelled) {
+                                System.out.println("Reservation #" + reservationId + " has been cancelled!");
+                                break;
+                            } else {
+                                System.out.println("Could not cancel. Please check the ID and try again.");
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Invalid input! Please enter a number for Reservation ID.");
+                        }
                     }
                     break;
 
                 case 4: // Collins - Check-in
                     System.out.println("\n===== Check-In =====");
 
-                    System.out.print("Enter Reservation ID for Check-in: ");
-                    int checkInId = scanner.nextInt();
-                    scanner.nextLine(); //consume newline
+                    while (true) {
+                        try {
+                            System.out.print("Enter Reservation ID for Check-In: ");
+                            int checkInId = Integer.parseInt(scanner.nextLine());
 
-                    hotel.checkIn(checkInId);
+                            boolean success = hotel.checkIn(checkInId);
+                            if (success) break;
+                        } catch (Exception e) {
+                            System.out.println("Invalid input! Please enter a number for Check-In");
+                        }
+                    }
                     break;
 
 
                 case 5: // Collins - Check-out
                     System.out.println("\n===== Check-Out  =====");
 
-                    System.out.print("Enter Reservation ID for Check-out: ");
-                    int checkOutId = scanner.nextInt();
+                    while (true) {
+                        try {
+                            System.out.print("Enter Reservation ID for Check-Out: ");
+                            int checkOutId = Integer.parseInt(scanner.nextLine());
 
-                    hotel.checkOut(checkOutId);
+                            boolean success = hotel.checkOut(checkOutId);
+                            if (success) break;
+                        } catch (Exception e) {
+                            System.out.println("Invalid input! Please enter a number for Check-Out");
+                        }
+                    }
                     break;
-
-
-
-
 
                 case 6: // Joana - View all reservation
                     hotel.getReservations();
