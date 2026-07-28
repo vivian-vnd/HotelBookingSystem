@@ -153,7 +153,7 @@ public class Main {
 
                 case 2: // Vivian - Make a reservation
                     System.out.println("\n===== Make a reservation =====");
-                    ;
+
                     String roomNumber;
                     LocalDate checkInDate = null;
                     LocalDate checkOutDate = null;
