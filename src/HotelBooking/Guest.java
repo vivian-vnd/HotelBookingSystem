@@ -11,13 +11,13 @@ public class Guest {
     private static int nextId = 1;
 
     public Guest (String name, String phoneNumber, String email){
-        name = name.trim().replaceAll("\s+", " ");
-        phoneNumber = phoneNumber.trim();
-        email = email.trim();
-
         validateName(name);
         validatePhoneNumber(phoneNumber);
         validateEmail(email);
+
+        name = name.trim().replaceAll("\s+", " ");
+        phoneNumber = phoneNumber.trim();
+        email = email.trim();
 
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -46,20 +46,20 @@ public class Guest {
 
     // setters
     public void setName(String name) {
-        name = name.trim().replaceAll("\s+", " ");
         validateName(name);
+        name = name.trim().replaceAll("\s+", " ");
         this.name = name;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        phoneNumber= phoneNumber.trim();
         validatePhoneNumber(phoneNumber);
+        phoneNumber= phoneNumber.trim();
         this.phoneNumber = phoneNumber;
     }
 
     public void setEmail(String email) {
-        email = email.trim();
         validateEmail(email);
+        email = email.trim();
         this.email = email;
     }
 

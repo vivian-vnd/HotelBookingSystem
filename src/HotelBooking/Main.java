@@ -9,11 +9,11 @@ public class Main {
     private static String readValidName(Scanner scanner) {
         while (true) {
             System.out.print("Enter guest name: ");
-            String guestName = scanner.nextLine();
+            String name = scanner.nextLine();
 
             try {
-                Guest.validateName(guestName);
-                return guestName.trim().replaceAll("\s+", " ");
+                Guest.validateName(name);
+                return name = name.trim().replaceAll("\s+", " ");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
