@@ -99,13 +99,10 @@ classDiagram
         +addGuest(Guest) void
     }
 
-    class DatabaseManager {
-        -URL: String
-        -conn: Connection
-        +connect() void
-        +createTables() void
-        +getConnection() Connection
-        +close() void
+    class CsvDatabase {
+        <<utility>>
+        +loadAllData(Hotel) void
+        +saveAllData(Hotel) void
     }
 
     class Main {
@@ -122,9 +119,9 @@ classDiagram
     Hotel "1" *-- "many" Room : contains
     Hotel "1" *-- "many" Reservation : manages
     Hotel "1" *-- "1" GuestManager : uses
-    Hotel --> DatabaseManager : uses
     GuestManager "1" *-- "many" Guest : manages
     Reservation "1" --> "1" Guest : has
     Reservation "1" --> "1" Room : books
     Invoice "1" --> "1" Reservation : bills
     Main --> Hotel : controls
+    Hotel ..> CsvDatabase : uses
