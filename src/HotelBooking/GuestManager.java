@@ -14,9 +14,11 @@ public class GuestManager {
         if (guest == null) {
             throw new IllegalArgumentException("Please provide a valid Guest to be added.");
         }
+        if (findGuestById(guest.getId()) != null) {
+            throw new IllegalArgumentException("A guest with this ID already exists.");
+        }
         guests.add(guest);
     }
-
     // find guest by ID
     public Guest findGuestById(int id) {
         for (Guest guest : guests) {
