@@ -27,7 +27,7 @@ public class Invoice {
 
     // Default breakfast rate €15
     public Invoice(Reservation reservation) {
-        this(reservation, 10.0);
+        this(reservation, 15.0);
     }
 
 
