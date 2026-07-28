@@ -79,19 +79,37 @@ public class Guest {
         }
     }
 
-    public static void validatePhoneNumber(String phoneNumber){
-        // check if the phone number is not null and not blank
-        if (phoneNumber == null || phoneNumber.trim().isEmpty()){
+    public static void validatePhoneNumber(String phoneNumber) {
+       // // check if is not null and not blank
+        if (phoneNumber == null || phoneNumber.trim().isEmpty()) {
             throw new IllegalArgumentException("Invalid phone number. Phone number is required. Please enter the guest's phone number.");
         }
 
-        // check if every character is a digit
-        for (int i = 0; i<phoneNumber.length(); i++){
+        // necessary to control minimum 7 digits and 15 digits
+        int digitCount = 0;
+
+        // goes through the phone number each character at a time
+        for (int i = 0; i < phoneNumber.length(); i++) {
+            // getting current character
             char c = phoneNumber.charAt(i);
 
-            if (!Character.isDigit(c)){
-                throw new IllegalArgumentException("Invalid phone number. Please enter a valid phone number containing digits only.");
+            // checks if current character is a number from 0 to 9
+            if (Character.isDigit(c)) {
+                digitCount++; // if it is a digit, it increases the digit count
+            } else if (c == ' ' || c == '-') { // if this character is a space or hyphen, the method accepts it, but ignores
+                continue;
+            } else if (c == '+') { // check if the current character is a plus sign
+                if (i != 0) { // if + is not the first character, it is not allowed
+                    throw new IllegalArgumentException("Invalid phone number. '+' is only allowed at the beginning.");
+                }
+            } else { // if it didn't match any of the valid cases, it must be something invalid
+                throw new IllegalArgumentException("Invalid phone number. Use digits, spaces, hyphens, and an optional '+' at the beginning only.");
             }
+        }
+
+        // minimum and maximum digit count
+        if (digitCount < 7 || digitCount > 15) {
+            throw new IllegalArgumentException("Invalid phone number. It must contain between 7 and 15 digits.");
         }
     }
 
