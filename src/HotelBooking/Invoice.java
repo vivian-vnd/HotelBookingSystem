@@ -41,7 +41,7 @@ public class Invoice {
 
     // 2. Calculate room cost: (price per night) * (number of nights)
     public double calculateRoomTotal() {
-        return reservation.getRoom().getPricePerNight() * getNumberOfNights();
+        return reservation.getRoom().getPrice() * getNumberOfNights();
     }
 
     // 3. Calculate breakfast cost: (breakfast rate) * (number of nights) if selected

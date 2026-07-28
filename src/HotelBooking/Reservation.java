@@ -99,7 +99,7 @@ public class Reservation implements priceable {
 
     @Override
     public double getPrice() {
-        double roomTotal = room.getPricePerNight() * getNumberOfNights();
+        double roomTotal = room.getPrice() * getNumberOfNights();
         double breakfastCost = 0;
         if (this.breakfastIncluded) {
             breakfastCost = 10.0 * getNumberOfNights();
