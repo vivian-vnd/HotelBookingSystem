@@ -1,8 +1,6 @@
 package HotelBooking;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class GuestManager {
     private ArrayList<Guest> guests;
@@ -21,6 +19,7 @@ public class GuestManager {
         }
         guests.add(guest);
     }
+
     // find guest by ID
     public Guest findGuestById(int id) {
         if (id <= 0) {
@@ -50,8 +49,18 @@ public class GuestManager {
         return false;
     }
 
-    // return the list of guests, and it ensures no one can clear all the Guest List
-    public List<Guest> getAllGuests() {
-        return Collections.unmodifiableList(guests);
+    // return the list of guests
+    public ArrayList<Guest> getAllGuests() {
+        return guests;
+    }
+
+    // checks whether there are no guests in the collection
+    public boolean isEmpty() {
+        return guests.isEmpty();
+    }
+
+    // returns the number of guests currently stored
+    public int getGuestCount() {
+        return guests.size();
     }
 }

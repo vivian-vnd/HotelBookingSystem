@@ -1,0 +1,2 @@
+ReservationID,GuestID,RoomNumber,CheckInDate,CheckOutDate,BreakfastIncluded,Status
+1,1,101,28-11-2026,30-11-2026,true,Cancelled
