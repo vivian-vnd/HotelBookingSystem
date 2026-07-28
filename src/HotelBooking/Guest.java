@@ -10,17 +10,16 @@ public class Guest {
 
     // Normal constructor for new guests
     public Guest(String name, String phoneNumber, String email) {
-        name = name.trim();
+        validateName(name);
+        validatePhoneNumber(phoneNumber);
+        validateEmail(email);
+
+        name = name.trim().replaceAll("\s+", " ");
         phoneNumber = phoneNumber.trim();
         email = email.trim();
 
-        validateName(name);
         this.name = name;
-
-        validatePhoneNumber(phoneNumber);
         this.phoneNumber = phoneNumber;
-
-        validateEmail(email);
         this.email = email;
 
         this.id = nextId;
@@ -47,20 +46,20 @@ public class Guest {
 
     // Setters
     public void setName(String name) {
-        name = name.trim();
         validateName(name);
+        name = name.trim().replaceAll("\s+", " ");
         this.name = name;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        phoneNumber = phoneNumber.trim();
         validatePhoneNumber(phoneNumber);
+        phoneNumber= phoneNumber.trim();
         this.phoneNumber = phoneNumber;
     }
 
     public void setEmail(String email) {
-        email = email.trim();
         validateEmail(email);
+        email = email.trim();
         this.email = email;
     }
 
@@ -83,11 +82,25 @@ public class Guest {
             throw new IllegalArgumentException("Invalid phone number. Phone number is required. Please enter the guest's phone number.");
         }
 
+        int digitCount = 0;
+
         for (int i = 0; i < phoneNumber.length(); i++) {
             char c = phoneNumber.charAt(i);
-            if (!Character.isDigit(c)) {
-                throw new IllegalArgumentException("Invalid phone number. Please enter a valid phone number containing digits only.");
+            if (Character.isDigit(c)) {
+                digitCount++;
+            } else if (c == ' ' || c == '-') {
+                continue;
+            } else if (c == '+') {
+                if (i != 0) {
+                    throw new IllegalArgumentException("Invalid phone number. '+' is only allowed at the beginning.");
+                }
+            } else {
+                throw new IllegalArgumentException("Invalid phone number. Use digits, spaces, hyphens, and an optional '+' at the beginning only.");
             }
+        }
+
+        if (digitCount < 7 || digitCount > 15) {
+            throw new IllegalArgumentException("Invalid phone number. It must contain between 7 and 15 digits.");
         }
     }
 

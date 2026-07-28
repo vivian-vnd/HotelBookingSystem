@@ -14,11 +14,18 @@ public class GuestManager {
         if (guest == null) {
             throw new IllegalArgumentException("Please provide a valid Guest to be added.");
         }
+        if (findGuestById(guest.getId()) != null) {
+            throw new IllegalArgumentException("A guest with this ID already exists.");
+        }
         guests.add(guest);
     }
 
     // find guest by ID
     public Guest findGuestById(int id) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("Guest ID must be positive.");
+        }
+
         for (Guest guest : guests) {
             if (guest.getId() == id) {
                 return guest;
