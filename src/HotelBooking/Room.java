@@ -1,6 +1,6 @@
 package HotelBooking;
 
-public abstract class Room implements Priceable {
+public abstract class Room implements priceable {
     private String roomNumber;
     private String status;
 
@@ -34,21 +34,22 @@ public abstract class Room implements Priceable {
         return "Available".equalsIgnoreCase(status);
     }
 
-    // Marks the room as booked
     public void bookRoom() {
         this.status = "Booked";
     }
 
-    // Mark the room as available again (after cancellation or checkout)
     public void releaseRoom() {
         this.status = "Available";
+    }
+
+    public double getPricePerNight() {
+        return getPrice();
     }
 
     // Polymorphism method from priceable interface implemented in subclasses
     @Override
     public abstract double getPrice();
 
-    // ====== PRINTING =======
     @Override
     public String toString() {
         return "Room " + roomNumber + " | Type: " + getType() + " | Price: €" + getPrice() + " | Status: " + status;
