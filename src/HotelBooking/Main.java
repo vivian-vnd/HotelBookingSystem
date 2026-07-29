@@ -163,8 +163,25 @@ public class Main {
                     hotel.addGuest(newGuest);
 
                     // === Room Number ===
-                    System.out.print("Enter Room Number: ");
-                    roomNumber = scanner.nextLine();
+                    while (true) {
+                        try {
+                            System.out.print("Enter room number: ");
+                            roomNumber = scanner.nextLine().trim();
+
+                            Room selectedRoom = hotel.findRoomByNumber(roomNumber);
+
+                            if (selectedRoom == null) {
+                                throw new IllegalArgumentException("Invalid room number! This room does not exist.");
+                            }
+
+                            if (!selectedRoom.isAvailable()) {
+                                throw new IllegalArgumentException("Room is already booked. Please choose another room.");
+                            }
+                            break;
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
 
                     // === Date input ===
                     while (true) {
